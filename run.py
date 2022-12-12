@@ -21,7 +21,7 @@ print("Welcome to St Mochtas Football club\n")
 
 def choose_first_menu():
     """
-    This function checks the inout and loads the corrct
+    This function checks the inout and loads the correct
     function based on the answer.
     """
     print("Please chose:\n")
@@ -56,15 +56,47 @@ def player_menu():
     print("4. Confirm Order for Team Kits.\n")
     player_menu_choice = input("Please enter a number 1 to 4:")
     if int(player_menu_choice) == 1:
-        print("Reg New player")
+        reg_new_player()
     elif int(player_menu_choice) == 2:
-        print("Print all")
+        show_all_outstanding_fees()
     elif int(player_menu_choice) == 3:
-        print("Make payment")
+        pay_fee_for_player()
     elif int(player_menu_choice) == 4:
-        print("Order Kit")
+        confirm_kit_order()
     else:
         player_menu()
+
+
+def reg_new_player():
+    """
+    Function to take in player details and append them to the spread sheet.
+    """
+    print("you are now in reg player function")
+
+
+def show_all_outstanding_fees():
+    """
+    Function to print a list of all players with outstanding fees to the
+    terminal.
+    """
+    print("you are now in function to print players fees")
+
+
+def pay_fee_for_player():
+    """
+    Function to pay eitheran agreed installment off the fee or pay the fee
+    in full.
+    """
+    print("Please pay off fee")
+
+
+def confirm_kit_order():
+    """
+    Function to display the amount of different sizes entered for a team and
+    confirm them to order which will them write them to a different sheet on
+    the spreadsheet.
+    """
+    print("Please order your kits for your team")
 
 
 choose_first_menu()
