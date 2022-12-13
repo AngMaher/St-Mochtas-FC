@@ -1,8 +1,10 @@
 """
 dkajdkajk
 """
-
+import sys
+import random
 import gspread
+from colorama import Fore, Style
 from google.oauth2.service_account import Credentials
 
 SCOPE = [
@@ -16,25 +18,26 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('st_mochtas_fc')
 
-print("Welcome to St Mochtas Football club\n")
-
 
 def choose_first_menu():
     """
     This function checks the inout and loads the correct
     function based on the answer.
     """
-    print("Please chose:\n")
-    print("1. Work with player details.")
-    print("2. Get quick pick lotto numbers.\n")
-    menu_one = input("Please Enter 1 or 2: ")
+    print("""Please chose:\n
+    1. Work with player details.
+    2. Get quick pick lotto numbers.
+    3. Quit.\n""")
+    menu_one = input("Please Enter 1 or 2 or 3: ")
     print(f'You have choosen {menu_one}')
-    if int(menu_one) == 1:
+    if menu_one == '1':
         player_menu()
-    elif int(menu_one) == 1:
+    elif menu_one == '2':
         lotto_quickpick()
+    elif menu_one == '3':
+        sys.exit()
     else:
-        print("Error Wrong Number")
+        choose_first_menu()
 
 
 def lotto_quickpick():
@@ -43,26 +46,41 @@ def lotto_quickpick():
     display ramdon lotto numbers to the screen.
     """
     print('Do you want numbers for 1 line or 3?\n')
+    num_of_lines = input("Please enter 1 or 3")
+    if num_of_lines == '1':
+        lotto_line = random.sample(range(1, 28), 5)
+        print(lotto_line)
+    elif num_of_lines == '3':
+        lotto_line = random.sample(range(1, 28), 5)
+        print(f"\n {lotto_line}")
+    else:
+        lotto_quickpick()
 
 
 def player_menu():
     """
     Function to enter the player section and choose you option.
     """
-    print("Please choose from the following options:\n")
-    print("1. Register a player to your team.")
-    print("2. Print a list of all your players and fees due.")
-    print("3. Pay instalment of fees.")
-    print("4. Confirm Order for Team Kits.\n")
-    player_menu_choice = input("Please enter a number 1 to 4:")
-    if int(player_menu_choice) == 1:
+    print(Fore.LIGHTBLUE_EX + """
+    Please choose from the following options:\n
+    1. Register a player to your team.
+    2. Print a list of all your players and fees due.
+    3. Pay instalment of fees.
+    4. Confirm Order for Team Kits.
+    5. Quit program.\n
+    """ + Style.RESET_ALL)
+    player_menu_choice = input("Please enter a number 1 to 4: ")
+    if player_menu_choice == '1':
         reg_new_player()
-    elif int(player_menu_choice) == 2:
+    elif player_menu_choice == '2':
         show_all_outstanding_fees()
-    elif int(player_menu_choice) == 3:
+    elif player_menu_choice == '3':
         pay_fee_for_player()
-    elif int(player_menu_choice) == 4:
+    elif player_menu_choice == '4':
         confirm_kit_order()
+    elif player_menu_choice == '5':
+        print("Program is terminating...")
+        sys.exit()
     else:
         player_menu()
 
