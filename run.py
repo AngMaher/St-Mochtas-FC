@@ -19,11 +19,20 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('st_mochtas_fc')
 
 
+def welcome_logo():
+    """
+    Function to hold welcome title for program
+    """
+    print(Fore.BLUE + """
+    Welcome to St Mochtas FC""" + Style.RESET_ALL)
+
+
 def choose_first_menu():
     """
     This function checks the inout and loads the correct
     function based on the answer.
     """
+    welcome_logo()
     print("""Please chose:\n
     1. Work with player details.
     2. Get quick pick lotto numbers.
@@ -45,6 +54,7 @@ def lotto_quickpick():
     function to choose how many lines of lotto you want numbers for, and to
     display ramdon lotto numbers to the screen.
     """
+    print()
     print('Do you want numbers for 1 line or 3?')
     num_of_lines = input("Please enter 1 or 3: ")
     if num_of_lines == '1':
@@ -61,6 +71,13 @@ def lotto_quickpick():
         print(*lotto_line2)
         print(Fore.LIGHTBLUE_EX + "Quickpick Line Three: " + Style.RESET_ALL)
         print(*lotto_line3)
+        to_end = input("Return to main menu? y/n: ")
+        if to_end.upper() == 'Y':
+            choose_first_menu()
+        elif to_end.upper() == 'N':
+            sys.exit()
+        else:
+            lotto_quickpick()
     else:
         lotto_quickpick()
 
@@ -97,7 +114,9 @@ def reg_new_player():
     """
     Function to take in player details and append them to the spread sheet.
     """
-    print("you are now in reg player function")
+    print("To Enter New Player please follow the following example:\n")
+    print("Kit sizes are as follows, YS, YM, YL, YXL, XS, S, M, L")
+    print("")
 
 
 def show_all_outstanding_fees():
