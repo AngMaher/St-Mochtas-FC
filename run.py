@@ -45,14 +45,22 @@ def lotto_quickpick():
     function to choose how many lines of lotto you want numbers for, and to
     display ramdon lotto numbers to the screen.
     """
-    print('Do you want numbers for 1 line or 3?\n')
-    num_of_lines = input("Please enter 1 or 3")
+    print('Do you want numbers for 1 line or 3?')
+    num_of_lines = input("Please enter 1 or 3: ")
     if num_of_lines == '1':
         lotto_line = random.sample(range(1, 28), 5)
-        print(lotto_line)
+        print("\nQuickpick Line One: ")
+        print(*lotto_line)
     elif num_of_lines == '3':
         lotto_line = random.sample(range(1, 28), 5)
-        print(f"\n {lotto_line}")
+        lotto_line2 = random.sample(range(1, 28), 5)
+        lotto_line3 = random.sample(range(1, 28), 5)
+        print(Fore.LIGHTBLUE_EX + "Quickpick Line One: " + Style.RESET_ALL)
+        print(*lotto_line)
+        print(Fore.LIGHTBLUE_EX + "Quickpick Line Two: " + Style.RESET_ALL)
+        print(*lotto_line2)
+        print(Fore.LIGHTBLUE_EX + "Quickpick Line Three: " + Style.RESET_ALL)
+        print(*lotto_line3)
     else:
         lotto_quickpick()
 
