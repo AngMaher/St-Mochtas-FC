@@ -1,8 +1,10 @@
 """
-dkajdkajk
+This program is based on a local football club, where player details are stored
+in a spreadsheet and can be amended
 """
 import sys
 import random
+from tabulate import tabulate
 import gspread
 from colorama import Fore, Style
 from google.oauth2.service_account import Credentials
@@ -82,7 +84,7 @@ def player_menu():
     """
     print(Fore.LIGHTBLUE_EX + """
     Please choose from the following options:\n
-    1. Register a player to your team.
+    1. Register or delete a player on your team.
     2. Print a list of all your players and fees due.
     3. Pay instalment of fees.
     4. Confirm Order for Team Kits.
@@ -109,7 +111,7 @@ def reg_new_player():
     Function to take in player details and append them to the spread sheet.
     """
     print("To Enter New Player please follow the following example:\n")
-    print("Kit sizes are as follows, YS, YM, YL, YXL, XS, S, M, L")
+    print("Kit sizes are as follows,YXS, YS, YM, YL, YXL, XS, S, M, L")
     print("")
 
 
@@ -152,4 +154,16 @@ def back_to_main_menu():
         back_to_main_menu()
 
 
+def print_all_data():
+    """
+    Function to print all data in a table using tabulate
+    found on https://www.statology.org/create-table-in-python/
+    """
+    players_list = SHEET.worksheet('player')
+    data = players_list.get_all_values()
+    col_names = data[0]
+    print(tabulate(data[1], headers=col_names, tablefmt="pretty"))
+
+
 main_menu()
+print_all_data()
