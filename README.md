@@ -1,31 +1,14 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# St Mochtas Football Club Application
 
-Welcome AngMaher,
+## Introduction
+This is a program for a local football club, which can be easily be adapted to suit many different types of clubs.
+The user can add a new player to a spreadsheet, clear off a players fees, check outstanding fees, and put in an order 
+for kits for the team. The club also do a lotto each week and the user can get lotto numbers for doing quick pick.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+# User Experience
 
-## Reminders
-
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
-
-## Creating the Heroku app
-
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
-
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
+- User Goals
+  - As a user they want to see a list of all players to note their username before making changes.
+  - A coach or director of the club wants a way to add new players to the team.
+  - As a user they want to be able to delete a player.
+  - As a user they want to be able to pay an installment or their fee off in full.
