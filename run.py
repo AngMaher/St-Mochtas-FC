@@ -111,8 +111,13 @@ def reg_new_player():
     Function to take in player details and append them to the spread sheet.
     """
     print("To Enter New Player please follow the following example:\n")
+    print("Year,Name,contact email,kit sisize,fee due")
+    print("U10,Joe Smith,joesmith@mail.com,YL,180\n")
+
     print("Kit sizes are as follows,YXS, YS, YM, YL, YXL, XS, S, M, L")
-    print("")
+
+    player_data = input("Please enter details here: ")
+    print(player_data)
 
 
 def show_all_outstanding_fees():
@@ -161,8 +166,7 @@ def print_all_data():
     """
     players_list = SHEET.worksheet('player')
     data = players_list.get_all_values()
-    col_names = data[0]
-    print(tabulate(data[1], headers=col_names, tablefmt="pretty"))
+    print(tabulate(data, headers=data[0], tablefmt="pretty"))
 
 
 main_menu()
