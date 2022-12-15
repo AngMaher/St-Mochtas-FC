@@ -92,7 +92,7 @@ def player_menu():
     """ + Style.RESET_ALL)
     player_menu_choice = input("Please enter a number 1 to 5: ")
     if player_menu_choice == '1':
-        reg_new_player()
+        get_player_details()
     elif player_menu_choice == '2':
         show_all_outstanding_fees()
     elif player_menu_choice == '3':
@@ -106,18 +106,40 @@ def player_menu():
         player_menu()
 
 
-def reg_new_player():
+def get_player_details():
     """
     Function to take in player details and append them to the spread sheet.
     """
     print("To Enter New Player please follow the following example:\n")
-    print("Year,Name,contact email,kit sisize,fee due")
-    print("U10,Joe Smith,joesmith@mail.com,YL,180\n")
+    print("Year,Name,contact number,kit size,fee due")
+    print("U10,Joe Smith,0866252354,YL,180\n")
 
     print("Kit sizes are as follows,YXS, YS, YM, YL, YXL, XS, S, M, L")
 
-    player_data = input("Please enter details here: ")
-    print(player_data)
+    data_str = input("Please enter details here: ")
+    player_data = data_str.split(",")
+    check_player_data(player_data)
+
+
+def check_player_data(values):
+    """
+    Function to check the values entered for player are valid
+
+    """
+    try:
+        if len(values) != 5:
+            raise ValueError(
+                f"Exactly 5 values required, you provided {len(values)}"
+            )
+    except ValueError as error:
+        print(f"Invalid data {error}, please try again.\n")
+    try:
+        if not values[0].upper().startswith("U"):
+            raise ValueError(
+                f"Should start ith U for Under, you put {values[0]}"
+            )
+    except ValueError as error:
+        print(f"Invalid data {error}, please try again.\n")
 
 
 def show_all_outstanding_fees():
@@ -170,4 +192,3 @@ def print_all_data():
 
 
 main_menu()
-print_all_data()
