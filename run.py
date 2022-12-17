@@ -2,6 +2,7 @@
 This program is based on a local football club, where player details are stored
 in a spreadsheet and can be amended
 """
+import os
 import sys
 import random
 from tabulate import tabulate
@@ -82,6 +83,7 @@ def player_menu():
     """
     Function to enter the player section and choose you option.
     """
+    os.system('cls')
     print(Fore.LIGHTBLUE_EX + """
     Please choose from the following options:\n
     1. Register or delete a player on your team.
@@ -110,15 +112,22 @@ def get_player_details():
     """
     Function to take in player details and append them to the spread sheet.
     """
-    print("To Enter New Player please follow the following example:\n")
-    print("Year,Name,contact number,kit size,fee due")
-    print("U10,Joe Smith,0866252354,YL,180\n")
+    while True:
+        print("To Enter New Player please follow the Instructions:\n")
+        print(Fore.RED + """
+    1. Format:  Year,Name,Mobile Nimber,kit size,fee due
+    2. Example: U10,Joe Smith,+353866052459,YL,180
+    3. Kit sizes: YXS, YS, YM, YL, YXL, XS, S, M, L
+    4. Please note the annual fee is 180 euro, no exceptions.
+            """ + Style.RESET_ALL)
 
-    print("Kit sizes are as follows,YXS, YS, YM, YL, YXL, XS, S, M, L")
+        data_str = input("Please enter details here: ")
+        player_data = data_str.split(",")
 
-    data_str = input("Please enter details here: ")
-    player_data = data_str.split(",")
-    check_player_data(player_data)
+        if check_player_data(player_data):
+            print("Thank you ")
+            break
+    return player_data
 
 
 def check_player_data(values):
@@ -131,15 +140,26 @@ def check_player_data(values):
             raise ValueError(
                 f"Exactly 5 values required, you provided {len(values)}"
             )
-    except ValueError as error:
-        print(f"Invalid data {error}, please try again.\n")
-    try:
         if not values[0].upper().startswith("U"):
             raise ValueError(
-                f"Should start ith U for Under, you put {values[0]}"
+                f"Should start with U for Under, you put {values[0]}"
+            )
+        if not values[2].startswith("+353"):
+            raise ValueError(
+                f"Please enter Mobile Number with +353, {values[2]} provided"
+            )
+        if values[3].upper() not in KIT_SIZES:
+            raise ValueError(
+                f"{values[3]} is not a size please check list of sizes above"
+            )
+        if values[4] != '180':
+            raise ValueError(
+                f"Fee is 180, you entered {values[4]}"
             )
     except ValueError as error:
         print(f"Invalid data {error}, please try again.\n")
+        return False
+    return True
 
 
 def show_all_outstanding_fees():
