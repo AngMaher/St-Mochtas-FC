@@ -20,3 +20,7 @@ for kits for the team. The club also do a lotto each week and the user can get l
   - As a developer, I want to keep the program simple
   - As a developer, I want to make navigating through straight forward and easy to follow.
   - As a developer, I want to create a easy to read tablr to display information from the spreadsheet.
+
+worked on bugs and warnings as they came along. when doing try/excpet got on error and realsied i had a second try the same further down.
+
+used love sandwiches as referrence for validating and writing player details

@@ -55,8 +55,8 @@ def main_menu():
 
 def lotto_quickpick():
     """
-    function to choose how many lines of lotto numbers you want numbers for
-    and to display ramdon lotto numbers to the screen.
+    function to choose how many lines of numbers to enter raffle
+    and to display ramdon numbers to the screen and save to spreadsheet
     """
     print()
     print('Do you want numbers for 1 line or 3?')
@@ -92,7 +92,7 @@ def player_menu():
     4. Confirm Order for Team Kits.
     5. Quit program.\n
     """ + Style.RESET_ALL)
-    player_menu_choice = input("Please enter a number 1 to 5: ")
+    player_menu_choice = input("Please enter a number 1 to 5: \n")
     if player_menu_choice == '1':
         get_player_details()
     elif player_menu_choice == '2':
@@ -111,6 +111,7 @@ def player_menu():
 def get_player_details():
     """
     Function to take in player details and append them to the spread sheet.
+    Used the love sandwiches program to setup the while loop.
     """
     while True:
         print("To Enter New Player please follow the Instructions:\n")
@@ -127,7 +128,19 @@ def get_player_details():
         if check_player_data(player_data):
             print("Thank you ")
             break
-    return player_data
+    update_player_worksheet(player_data)
+    back_to_main_menu()
+
+
+def update_player_worksheet(data):
+    """
+    Function to update player worksheet with player information.
+    This code was used from the love sandwiches program
+    """
+    print("Updating player worksheet...\n")
+    player_worksheet = SHEET.worksheet("player")
+    player_worksheet.append_row(data)
+    print("Player worksheet updated successfully.\n")
 
 
 def check_player_data(values):
@@ -168,6 +181,7 @@ def show_all_outstanding_fees():
     terminal.
     """
     print("you are now in function to print players fees")
+    print_all_data()
 
 
 def pay_fee_for_player():
