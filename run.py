@@ -3,6 +3,7 @@ This program is based on a local football club, where player details are stored
 in a spreadsheet and can be amended
 """
 import os
+import time
 import sys
 import random
 from tabulate import tabulate
@@ -29,8 +30,24 @@ def welcome_logo():
     """
     Function to hold welcome title for program
     """
-    print(Fore.BLUE + """
-    Welcome to St Mochtas FC""" + Style.RESET_ALL)
+    print(Fore.LIGHTYELLOW_EX + """
+ _     _ _______ ___     _______ _______ __   __ _______   _______ _______
+| | _ | |       |   |   |       |       |  |_|  |       | |       |       |
+| || || |    ___|   |   |       |   _   |       |    ___| |_     _|   _   |
+|       |   |___|   |   |       |  | |  |       |   |___    |   | |  | |  |
+|       |    ___|   |___|      _|  |_|  |       |    ___|   |   | |  |_|  |
+|   _   |   |___|       |     |_|       | ||_|| |   |___    |   | |       |
+|__| |__|_______|_______|_______|_______|_|   |_|_______|   |___| |_______|
+    """)
+    print(Fore.LIGHTYELLOW_EX + """
+ _______ _______   __   __ _______ _______ __   __ _______ _______ _______
+|       |       | |  |_|  |       |       |  | |  |       |   _   |       |
+|  _____|_     _| |       |   _   |       |  |_|  |_     _|  |_|  |  _____|
+| |_____  |   |   |       |  | |  |       |       | |   | |       | |_____
+|_____  | |   |   |       |  |_|  |      _|       | |   | |       |_____  |
+ _____| | |   |   | ||_|| |       |     |_|   _   | |   | |   _   |_____| |
+|_______| |___|   |_|   |_|_______|_______|__| |__| |___| |__| |__|_______|
+""" + Style.RESET_ALL)
 
 
 def main_menu():
@@ -39,12 +56,12 @@ def main_menu():
     function based on the answer.
     """
     welcome_logo()
-    print(Fore.LIGHTBLUE_EX + """Please chose:\n
+    print("Please choose from the following options:\n")
+    print(Fore.LIGHTBLUE_EX + """
     1. Work with player details.
     2. Get quick pick lotto numbers.
     3. Quit.\n""" + Style.RESET_ALL)
     menu_one = input("Please Enter 1 or 2 or 3: ")
-    print(f'You have choosen {menu_one}')
     if menu_one == '1':
         player_menu()
     elif menu_one == '2':
@@ -60,41 +77,62 @@ def lotto_quickpick():
     function to choose how many lines of numbers to enter raffle
     and to display ramdon numbers to the screen and save to spreadsheet
     """
-    print()
-    print('Do you want numbers for 1 line or 3?')
-    num_of_lines = input("Please enter 1 or 3: ")
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print(Fore.LIGHTYELLOW_EX + """
+ +-+-+-+-+-+ +-+-+-+-+
+ |L|o|t|t|o| |M|e|n|u|
+ +-+-+-+-+-+ +-+-+-+-+
+    """ + Style.RESET_ALL)
+    print(Fore.LIGHTBLUE_EX + """
+1. For 1 Line of Quick-pick Lotto numbers.
+2. For 3 Lines of Quick-pick Lotto numbers.
+    """ + Style.RESET_ALL)
+    num_of_lines = input("Please enter 1 or 2: ")
     if num_of_lines == '1':
         lotto_line = random.sample(range(1, 28), 5)
-        print("\nQuickpick Line One: ")
+        print(Fore.LIGHTBLUE_EX + "\nQuick-pick Line One: " + Style.RESET_ALL)
         print(*lotto_line)
         back_to_main_menu()
-    elif num_of_lines == '3':
+    elif num_of_lines == '2':
         lotto_line = random.sample(range(1, 28), 5)
         lotto_line2 = random.sample(range(1, 28), 5)
         lotto_line3 = random.sample(range(1, 28), 5)
-        print(Fore.LIGHTBLUE_EX + "Quickpick Line One: " + Style.RESET_ALL)
+        print(Fore.LIGHTBLUE_EX + "Quick-pick Line One: " + Style.RESET_ALL)
         print(*lotto_line)
-        print(Fore.LIGHTBLUE_EX + "Quickpick Line Two: " + Style.RESET_ALL)
+        print(Fore.LIGHTBLUE_EX + "Quick-pick Line Two: " + Style.RESET_ALL)
         print(*lotto_line2)
-        print(Fore.LIGHTBLUE_EX + "Quickpick Line Three: " + Style.RESET_ALL)
+        print(Fore.LIGHTBLUE_EX + "Quick-pick Line Three: " + Style.RESET_ALL)
         print(*lotto_line3)
         back_to_main_menu()
+    else:
+        print("\nYou entered incorrect, please enter again")
+        time.sleep(2)
+        lotto_quickpick()
 
 
 def player_menu():
     """
     Function to enter the player section and choose you option.
+    found clear screen:
+    https://stackoverflow.com/questions/2084508/clear-terminal-in-python
+    ASCII art:
+    http://patorjk.com/software/taag/#p=display&h=2&v=2&f=Digital&t=Player%20Menu
     """
-    os.system('cls')
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print(Fore.LIGHTYELLOW_EX + """
+     +-+-+-+-+-+-+ +-+-+-+-+
+     |P|l|a|y|e|r| |M|e|n|u|
+     +-+-+-+-+-+-+ +-+-+-+-+
+     """ + Style.RESET_ALL)
+    print("Please choose from the following options:\n")
     print(Fore.LIGHTBLUE_EX + """
-    Please choose from the following options:\n
-    1. Register or delete a player on your team.
-    2. Print a list of all your players and fees due.
-    3. Pay instalment of fees.
+    1. Register a player on your team.
+    2. Print a list of all players and fees due.
+    3. Pay instalment of fees or in full.
     4. Confirm Order for Team Kits.
     5. Quit program.\n
     """ + Style.RESET_ALL)
-    player_menu_choice = input("Please enter a number 1 to 5: \n")
+    player_menu_choice = input("Please enter a number 1 to 5: ")
     if player_menu_choice == '1':
         get_player_details()
     elif player_menu_choice == '2':
@@ -118,12 +156,11 @@ def get_player_details():
     while True:
         print("To Enter New Player please follow the Instructions:\n")
         print(Fore.RED + """
-    1. Format:  Username(Initials DOB),Name,Mobile Nimber,kit size,fee due
+    1. Format:  Username(Initials DOB),Name,Mobile Number,Kit Size,Fee Due
     2. Example: JS12jan12,Joe Smith,+353866052459,YL,180
     3. Kit sizes: YXS, YS, YM, YL, YXL, XS, S, M, L
     4. Please note the annual fee is 180 euro, no exceptions.
             """ + Style.RESET_ALL)
-
         data_str = input("Please enter details here: ")
         player_data = data_str.split(",")
         if check_player_data(player_data):
@@ -181,8 +218,9 @@ def show_all_outstanding_fees():
     Function to print a list of all players with outstanding fees to the
     terminal.
     """
-    print("you are now in function to print players fees")
+    print("Find below a list of all players and whatg they owe.")
     print_all_data()
+    back_to_main_menu()
 
 
 def pay_fee_for_player():
@@ -221,7 +259,7 @@ def print_all_data():
     Function to print all data in a table using tabulate
     found on https://www.statology.org/create-table-in-python/
     """
-    print(tabulate(all_data, headers=all_data[0], tablefmt="pretty"))
+    print(tabulate(all_data[1:], headers=all_data[0], tablefmt="pretty"))
 
 
 main_menu()
