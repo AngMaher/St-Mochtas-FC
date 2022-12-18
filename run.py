@@ -21,6 +21,8 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('st_mochtas_fc')
+players_list = SHEET.worksheet('player')
+all_data = players_list.get_all_values()
 
 
 def welcome_logo():
@@ -116,31 +118,19 @@ def get_player_details():
     while True:
         print("To Enter New Player please follow the Instructions:\n")
         print(Fore.RED + """
-    1. Format:  Year,Name,Mobile Nimber,kit size,fee due
-    2. Example: U10,Joe Smith,+353866052459,YL,180
+    1. Format:  Username(Initials DOB),Name,Mobile Nimber,kit size,fee due
+    2. Example: JS12jan12,Joe Smith,+353866052459,YL,180
     3. Kit sizes: YXS, YS, YM, YL, YXL, XS, S, M, L
     4. Please note the annual fee is 180 euro, no exceptions.
             """ + Style.RESET_ALL)
 
         data_str = input("Please enter details here: ")
         player_data = data_str.split(",")
-
         if check_player_data(player_data):
             print("Thank you ")
             break
     update_player_worksheet(player_data)
     back_to_main_menu()
-
-
-def update_player_worksheet(data):
-    """
-    Function to update player worksheet with player information.
-    This code was used from the love sandwiches program
-    """
-    print("Updating player worksheet...\n")
-    player_worksheet = SHEET.worksheet("player")
-    player_worksheet.append_row(data)
-    print("Player worksheet updated successfully.\n")
 
 
 def check_player_data(values):
@@ -153,9 +143,9 @@ def check_player_data(values):
             raise ValueError(
                 f"Exactly 5 values required, you provided {len(values)}"
             )
-        if not values[0].upper().startswith("U"):
+        if any(values[0] in sl for sl in all_data):
             raise ValueError(
-                f"Should start with U for Under, you put {values[0]}"
+                f"\nUsername already in use, you put {values[0]}"
             )
         if not values[2].startswith("+353"):
             raise ValueError(
@@ -173,6 +163,17 @@ def check_player_data(values):
         print(f"Invalid data {error}, please try again.\n")
         return False
     return True
+
+
+def update_player_worksheet(data):
+    """
+    Function to update player worksheet with player information.
+    This code was used from the love sandwiches program
+    """
+    print("Updating player worksheet...\n")
+    player_worksheet = SHEET.worksheet("player")
+    player_worksheet.append_row(data)
+    print("Player worksheet updated successfully.\n")
 
 
 def show_all_outstanding_fees():
@@ -220,9 +221,7 @@ def print_all_data():
     Function to print all data in a table using tabulate
     found on https://www.statology.org/create-table-in-python/
     """
-    players_list = SHEET.worksheet('player')
-    data = players_list.get_all_values()
-    print(tabulate(data, headers=data[0], tablefmt="pretty"))
+    print(tabulate(all_data, headers=all_data[0], tablefmt="pretty"))
 
 
 main_menu()
