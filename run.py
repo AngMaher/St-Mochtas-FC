@@ -22,8 +22,8 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('st_mochtas_fc')
-players_list = SHEET.worksheet('player')
-all_data = players_list.get_all_values()
+player_worksheet = SHEET.worksheet('player')
+all_data = player_worksheet.get_all_values()
 
 
 def welcome_logo():
@@ -208,7 +208,6 @@ def update_player_worksheet(data):
     This code was used from the love sandwiches program
     """
     print("Updating player worksheet...\n")
-    player_worksheet = SHEET.worksheet("player")
     player_worksheet.append_row(data)
     print("Player worksheet updated successfully.\n")
 
@@ -218,6 +217,7 @@ def show_all_outstanding_fees():
     Function to print a list of all players with outstanding fees to the
     terminal.
     """
+    os.system('cls' if os.name == 'nt' else 'clear')
     print("Find below a list of all players and whatg they owe.")
     print_all_data()
     back_to_main_menu()
@@ -228,7 +228,62 @@ def pay_fee_for_player():
     Function to pay eitheran agreed installment off the fee or pay the fee
     in full.
     """
-    print("Please pay off fee")
+    print_all_data()
+    print("""
+    Please look at table above and take note of the username of the player
+    you would like to either pay an installment off full fee off.
+        """)
+    username = input("Please enter the username: ")
+    if any(username in sl for sl in all_data):
+        amending_fee(username)
+
+
+def amending_fee(name):
+    """
+    function to amend the new fee amount to the spreadsheet
+    """
+    username = player_worksheet.find(name)
+    print(f"Your have picked {username}")
+    cell_info = username.row
+    fee_due = player_worksheet.cell(cell_info, 5).value
+    if int(fee_due) == 0:
+        print("This player is fully paid.. Balance is zero")
+        print("returning to player menu...")
+        time.sleep(3)
+        player_menu()
+    else:
+        print(f"This player owes £{fee_due}")
+    while True:
+        print("Please Note: Please pay 1 installment of 60 or in full 180.")
+        amount_pay = input("Please input amount you are paying off: ")
+        if check_amount(amount_pay):
+            new_amount = int(fee_due) - int(amount_pay)
+            if new_amount < 0:
+                print("Paid too much off, Please check table again...")
+                time.sleep(5)
+                pay_fee_for_player()
+            else:
+                print(f"""
+        {player_worksheet.cell(cell_info, 2).value} now owes {new_amount}
+                  """)
+            player_worksheet.update_cell(cell_info, 5, new_amount)
+            break
+
+
+def check_amount(pay):
+    """
+    Function to check if the amount entered is either 60, 120, or 180
+    """
+    if pay == '60' or pay == '180':
+        return True
+    try:
+        if pay != '60' or pay != '180':
+            raise ValueError(
+                f"Please enter 60 or 180, {pay} provided"
+            )
+    except ValueError as error:
+        print(f"Invalid data {error}, please try again.\n")
+        return False
 
 
 def confirm_kit_order():
