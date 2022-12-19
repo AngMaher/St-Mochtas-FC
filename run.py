@@ -55,6 +55,7 @@ def main_menu():
     This function checks the input and loads the correct
     function based on the answer.
     """
+    os.system('cls' if os.name == 'nt' else 'clear')
     welcome_logo()
     print("Please choose from the following options:\n")
     print(Fore.LIGHTBLUE_EX + """
@@ -84,20 +85,20 @@ def lotto_quickpick():
  +-+-+-+-+-+ +-+-+-+-+
     """ + Style.RESET_ALL)
     print(Fore.LIGHTBLUE_EX + """
-1. For 1 Line of Quick-pick Lotto numbers.
-2. For 3 Lines of Quick-pick Lotto numbers.
+For 1 Line of Quick-pick Lotto numbers - 1
+For 3 Lines of Quick-pick Lotto numbers - 3
     """ + Style.RESET_ALL)
-    num_of_lines = input("Please enter 1 or 2: ")
+    num_of_lines = input("Please enter 1 or 3: ")
     if num_of_lines == '1':
         lotto_line = random.sample(range(1, 28), 5)
         print(Fore.LIGHTBLUE_EX + "\nQuick-pick Line One: " + Style.RESET_ALL)
         print(*lotto_line)
         back_to_main_menu()
-    elif num_of_lines == '2':
+    elif num_of_lines == '3':
         lotto_line = random.sample(range(1, 28), 5)
         lotto_line2 = random.sample(range(1, 28), 5)
         lotto_line3 = random.sample(range(1, 28), 5)
-        print(Fore.LIGHTBLUE_EX + "Quick-pick Line One: " + Style.RESET_ALL)
+        print(Fore.LIGHTBLUE_EX + "\nQuick-pick Line One: " + Style.RESET_ALL)
         print(*lotto_line)
         print(Fore.LIGHTBLUE_EX + "Quick-pick Line Two: " + Style.RESET_ALL)
         print(*lotto_line2)
@@ -218,8 +219,9 @@ def show_all_outstanding_fees():
     terminal.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
-    print("Find below a list of all players and whatg they owe.")
-    print_all_data()
+    print("Find below a list of all players and what they owe.")
+    fees_list = player_worksheet.findall('180', '120', '60')
+    print(*fees_list)
     back_to_main_menu()
 
 
@@ -228,14 +230,19 @@ def pay_fee_for_player():
     Function to pay eitheran agreed installment off the fee or pay the fee
     in full.
     """
+    os.system('cls' if os.name == 'nt' else 'clear')
     print_all_data()
     print("""
-    Please look at table above and take note of the username of the player
+    Please look at table above and take note of the USERNAME of the player
     you would like to either pay an installment off full fee off.
         """)
-    username = input("Please enter the username: ")
+    username = input("Please enter the username: ").upper()
     if any(username in sl for sl in all_data):
         amending_fee(username)
+    else:
+        print("Username is incorrect, please try again")
+        time.sleep(3)
+        pay_fee_for_player()
 
 
 def amending_fee(name):
@@ -243,16 +250,16 @@ def amending_fee(name):
     function to amend the new fee amount to the spreadsheet
     """
     username = player_worksheet.find(name)
-    print(f"Your have picked {username}")
     cell_info = username.row
     fee_due = player_worksheet.cell(cell_info, 5).value
+    name_of_player = player_worksheet.cell(cell_info, 2).value
     if int(fee_due) == 0:
-        print("This player is fully paid.. Balance is zero")
+        print(f"{name_of_player} is fully paid.. Balance is zero")
         print("returning to player menu...")
         time.sleep(3)
         player_menu()
     else:
-        print(f"This player owes £{fee_due}")
+        print(f"\n{name_of_player} owes £{fee_due}")
     while True:
         print("Please Note: Please pay 1 installment of 60 or in full 180.")
         amount_pay = input("Please input amount you are paying off: ")
@@ -263,11 +270,10 @@ def amending_fee(name):
                 time.sleep(5)
                 pay_fee_for_player()
             else:
-                print(f"""
-        {player_worksheet.cell(cell_info, 2).value} now owes {new_amount}
-                  """)
-            player_worksheet.update_cell(cell_info, 5, new_amount)
+                print(f"{name_of_player} now owes {new_amount}")
+                player_worksheet.update_cell(cell_info, 5, new_amount)
             break
+    back_to_main_menu()
 
 
 def check_amount(pay):
