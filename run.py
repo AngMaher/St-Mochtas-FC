@@ -6,6 +6,7 @@ import os
 import time
 import sys
 import random
+import re
 from tabulate import tabulate
 import gspread
 from colorama import Fore, Style
@@ -220,8 +221,19 @@ def show_all_outstanding_fees():
     """
     os.system('cls' if os.name == 'nt' else 'clear')
     print("Find below a list of all players and what they owe.")
-    fees_list = player_worksheet.findall('180', '120', '60')
-    print(*fees_list)
+    total_fees = player_worksheet.findall("60")
+    fees_120 = player_worksheet.findall("120")
+    fees_180 = player_worksheet.findall("180")
+    total_fees.extend(fees_120)
+    total_fees.extend(fees_180)  # text = total_fees[0]
+    total_row_nums = []
+    for text in total_fees:
+        row_num = re.search('R(.+?)C', str(text))
+        if row_num:
+            found = row_num.group(1)
+            total_row_nums.append(found)
+
+    print(total_row_nums)
     back_to_main_menu()
 
 
