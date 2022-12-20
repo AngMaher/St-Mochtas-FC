@@ -129,21 +129,24 @@ def player_menu():
     print("Please choose from the following options:\n")
     print(Fore.LIGHTBLUE_EX + """
     1. Register a player on your team.
-    2. Print a list of all players and fees due.
-    3. Pay instalment of fees or in full.
-    4. Confirm Order for Team Kits.
-    5. Quit program.\n
+    2. Delete player.
+    3. Print a list of all players and fees due.
+    4. Pay instalment of fees or in full.
+    5. Confirm Order for Team Kits.
+    6. Quit program.\n
     """ + Style.RESET_ALL)
     player_menu_choice = input("Please enter a number 1 to 5: ")
     if player_menu_choice == '1':
         get_player_details()
     elif player_menu_choice == '2':
-        show_all_outstanding_fees()
+        delete_player()
     elif player_menu_choice == '3':
-        pay_fee_for_player()
+        show_all_outstanding_fees()
     elif player_menu_choice == '4':
-        confirm_kit_order()
+        pay_fee_for_player()
     elif player_menu_choice == '5':
+        confirm_kit_order()
+    elif player_menu_choice == '6':
         print("Program is terminating...")
         sys.exit()
     else:
@@ -204,6 +207,24 @@ def check_player_data(values):
     return True
 
 
+def delete_player():
+    """
+    Function to delete a player in the database using username
+    """
+    print_all_data()
+    row_delete = input("""
+    \nPlease enter Username of person you wish to delete:
+                """)
+    print(row_delete)
+    row_number = player_worksheet.findall(row_delete)
+    print(row_number)
+    row_player = re.search('R(.+?)C', str(row_number))
+    if row_player:
+        found = row_player.group(1)
+        player_worksheet.delete_rows(int(found))
+    print(f"You have sucessfully deleted {row_delete}")
+
+
 def update_player_worksheet(data):
     """
     Function to update player worksheet with player information.
@@ -218,22 +239,35 @@ def show_all_outstanding_fees():
     """
     Function to print a list of all players with outstanding fees to the
     terminal.
+    used .findall() to find each of the amounts, could not find all the
+    amounts at one time, so I created different list and joined them into
+    one list.
+    Imported re to use function search to search through each string
+    and extract the row number. Then stored all row numbers in a list.
+    https://stackoverflow.com/questions/4666973/how-to-extract-the
+    -substring-between-two-markers
+    At this stage I iterated through list of all data from spreadsheet and
+    printed each row.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
-    print("Find below a list of all players and what they owe.")
+    print("Find below a list of all players in order of what they owe.\n")
+    print("Loading...\n")
     total_fees = player_worksheet.findall("60")
     fees_120 = player_worksheet.findall("120")
     fees_180 = player_worksheet.findall("180")
     total_fees.extend(fees_120)
-    total_fees.extend(fees_180)  # text = total_fees[0]
+    total_fees.extend(fees_180)
     total_row_nums = []
     for text in total_fees:
         row_num = re.search('R(.+?)C', str(text))
         if row_num:
             found = row_num.group(1)
             total_row_nums.append(found)
-
-    print(total_row_nums)
+    list_of_owed = []
+    for rows in total_row_nums:
+        each_row = player_worksheet.row_values(rows)
+        list_of_owed.append(each_row)
+    print(tabulate(list_of_owed[1:], headers=all_data[0], tablefmt="pretty"))
     back_to_main_menu()
 
 
@@ -244,10 +278,10 @@ def pay_fee_for_player():
     """
     os.system('cls' if os.name == 'nt' else 'clear')
     print_all_data()
-    print("""
+    print(Fore.RED + """
     Please look at table above and take note of the USERNAME of the player
     you would like to either pay an installment off full fee off.
-        """)
+        """ + Style.RESET_ALL)
     username = input("Please enter the username: ").upper()
     if any(username in sl for sl in all_data):
         amending_fee(username)
@@ -311,6 +345,7 @@ def confirm_kit_order():
     the spreadsheet.
     """
     print("Please order your kits for your team")
+    back_to_main_menu()
 
 
 def back_to_main_menu():
