@@ -162,7 +162,9 @@ def get_player_details():
         print("To Enter New Player please follow the Instructions:\n")
         print(Fore.RED + """
     1. Format:  Username(Initials DOB),Name,Mobile Number,Kit Size,Fee Due
+    """ + Fore.LIGHTYELLOW_EX + """
     2. Example: JS12jan12,Joe Smith,+353866052459,YL,180
+    """ + Style.RESET_ALL + Fore.RED + """
     3. Kit sizes: YXS, YS, YM, YL, YXL, XS, S, M, L
     4. Please note the annual fee is 180 euro, no exceptions.
             """ + Style.RESET_ALL)
@@ -223,6 +225,7 @@ def delete_player():
         found = row_player.group(1)
         player_worksheet.delete_rows(int(found))
     print(f"You have sucessfully deleted {row_delete}")
+    back_to_main_menu()
 
 
 def update_player_worksheet(data):
@@ -343,8 +346,22 @@ def confirm_kit_order():
     Function to display the amount of different sizes entered for a team and
     confirm them to order which will them write them to a different sheet on
     the spreadsheet.
+    found for loop on favtutor https://favtutor.com/blogs/python-count-
+    occurrences-in-list#:~:text=1)%20Using%20count()%20method,occurrences
+    %20is%20to%20be%20counted. Amended it to only go from second item.
     """
     print("Please order your kits for your team")
+    kit_col = player_worksheet.col_values(4)
+    kit_col_upper = [kit.upper() for kit in kit_col]
+    kit_dict = {}
+    for j in kit_col_upper[1:]:
+        if j in kit_dict:
+            kit_dict[j] += 1
+        else:
+            kit_dict[j] = 1
+    print("The following is the total number of kits needed:")
+    print(kit_dict)
+
     back_to_main_menu()
 
 

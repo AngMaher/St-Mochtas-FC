@@ -26,5 +26,8 @@ worked on bugs and warnings as they came along. when doing try/excpet got on err
 used love sandwiches as referrence for validating and writing player details
 
 decided tp change the year to a username, and it was not as straight forward as i thought, 
-i worked out that I needed to pass all the data into the function, but was finding it difficult to iterate through the sublist to check if the username was already used. I found from a online search on the stackoverflow site that using a built-in function any() would work. https://stackoverflow,com/questions/40514139/check-if-an-item-is-in-a-nested-list
+i worked out that I needed to pass all the data into the function, but was finding it difficult to iterate through the sublist to check if the username was already used. I found from a online search on the stackoverflow site that using a built-in function any() would work. https://stackoverflow.com/questions/40514139/check-if-an-item-is-in-a-nested-list
 from this i decided instead of calling all data from the spreadsheet i made it global.
+
+when adding delete player didnt work got an error about int str and I realised the row number was a string to changed to an int.
+it worked by got a warning to use delete_rows() instead of delete_row() so changed that and worked fine after that
