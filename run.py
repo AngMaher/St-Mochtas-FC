@@ -48,7 +48,7 @@ def welcome_logo():
 |_____  | |   |   |       |  |_|  |      _|       | |   | |       |_____  |
  _____| | |   |   | ||_|| |       |     |_|   _   | |   | |   _   |_____| |
 |_______| |___|   |_|   |_|_______|_______|__| |__| |___| |__| |__|_______|
-""" + Style.RESET_ALL)
+    """ + Style.RESET_ALL)
 
 
 def main_menu():
@@ -71,6 +71,8 @@ def main_menu():
     elif menu_one == '3':
         sys.exit()
     else:
+        print("Invaid! Please try again")
+        time.sleep(2)
         main_menu()
 
 
@@ -135,7 +137,7 @@ def player_menu():
     5. Confirm Order for Team Kits.
     6. Quit program.\n
     """ + Style.RESET_ALL)
-    player_menu_choice = input("Please enter a number 1 to 5: ")
+    player_menu_choice = input("Please enter a number 1 to 6: ")
     if player_menu_choice == '1':
         get_player_details()
     elif player_menu_choice == '2':
@@ -150,6 +152,8 @@ def player_menu():
         print("Program is terminating...")
         sys.exit()
     else:
+        print("Invaid! Please try again")
+        time.sleep(2)
         player_menu()
 
 
@@ -168,11 +172,15 @@ def get_player_details():
     3. Kit sizes: YXS, YS, YM, YL, YXL, XS, S, M, L
     4. Please note the annual fee is 180 euro, no exceptions.
             """ + Style.RESET_ALL)
-        data_str = input("Please enter details here: ")
-        player_data = data_str.split(",")
-        if check_player_data(player_data):
-            print("Thank you ")
-            break
+        data_str = input("""Please enter details here,
+                        or enter exit to go back: """)
+        if data_str.upper() == 'EXIT':
+            back_to_main_menu()
+        else:
+            player_data = data_str.split(",")
+            if check_player_data(player_data):
+                print("Thank you ")
+                break
     update_player_worksheet(player_data)
     back_to_main_menu()
 
@@ -215,17 +223,20 @@ def delete_player():
     """
     print_all_data()
     row_delete = input("""
-    \nPlease enter Username of person you wish to delete:
+    \nPlease enter Username of person you wish to delete, or exit:
                 """)
-    print(row_delete)
-    row_number = player_worksheet.findall(row_delete)
-    print(row_number)
-    row_player = re.search('R(.+?)C', str(row_number))
-    if row_player:
-        found = row_player.group(1)
-        player_worksheet.delete_rows(int(found))
-    print(f"You have sucessfully deleted {row_delete}")
-    back_to_main_menu()
+    if row_delete.upper() == 'EXIT':
+        back_to_main_menu()
+    else:
+        print(row_delete)
+        row_number = player_worksheet.findall(row_delete)
+        print(row_number)
+        row_player = re.search('R(.+?)C', str(row_number))
+        if row_player:
+            found = row_player.group(1)
+            player_worksheet.delete_rows(int(found))
+        print(f"You have sucessfully deleted {row_delete}")
+        back_to_main_menu()
 
 
 def update_player_worksheet(data):
@@ -270,6 +281,8 @@ def show_all_outstanding_fees():
     for rows in total_row_nums:
         each_row = player_worksheet.row_values(rows)
         list_of_owed.append(each_row)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("Find below a list of all players in order of what they owe.\n")
     print(tabulate(list_of_owed[1:], headers=all_data[0], tablefmt="pretty"))
     back_to_main_menu()
 
