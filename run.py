@@ -25,6 +25,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('st_mochtas_fc')
 player_worksheet = SHEET.worksheet('player')
 all_data = player_worksheet.get_all_values()
+raffle_worksheet = SHEET.worksheet('raffle')
 
 
 def welcome_logo():
@@ -61,14 +62,17 @@ def main_menu():
     print("Please choose from the following options:\n")
     print(Fore.LIGHTBLUE_EX + """
     1. Work with player details.
-    2. Get quick pick lotto numbers.
-    3. Quit.\n""" + Style.RESET_ALL)
+    2. Get 1 line to 3 lines of raffle numbers.
+    3. Pick Raffle winners.
+    4. Quit.\n""" + Style.RESET_ALL)
     menu_one = input("Please Enter 1 or 2 or 3: ")
     if menu_one == '1':
         player_menu()
     elif menu_one == '2':
-        lotto_quickpick()
+        raffle_numbers()
     elif menu_one == '3':
+        pick_raffle_winners()
+    elif menu_one == '4':
         sys.exit()
     else:
         print("Invaid! Please try again")
@@ -76,42 +80,69 @@ def main_menu():
         main_menu()
 
 
-def lotto_quickpick():
+def raffle_numbers():
     """
     function to choose how many lines of numbers to enter raffle
     and to display ramdon numbers to the screen and save to spreadsheet
     """
     os.system('cls' if os.name == 'nt' else 'clear')
     print(Fore.LIGHTYELLOW_EX + """
- +-+-+-+-+-+ +-+-+-+-+
- |L|o|t|t|o| |M|e|n|u|
- +-+-+-+-+-+ +-+-+-+-+
+ +-+-+-+-+-+-+ +-+-+-+-+
+ |R|a|f|f|l|e| |M|e|n|u|
+ +-+-+-+-+-+-+ +-+-+-+-+
     """ + Style.RESET_ALL)
     print(Fore.LIGHTBLUE_EX + """
-For 1 Line of Quick-pick Lotto numbers - 1
-For 3 Lines of Quick-pick Lotto numbers - 3
+For 1 Line of Raffle Ticket numbers - 1
+For 3 Lines of Raffle Ticket numbers - 3
     """ + Style.RESET_ALL)
     num_of_lines = input("Please enter 1 or 3: ")
     if num_of_lines == '1':
         lotto_line = random.sample(range(1, 28), 5)
-        print(Fore.LIGHTBLUE_EX + "\nQuick-pick Line One: " + Style.RESET_ALL)
+        print(Fore.LIGHTBLUE_EX + """\nRaffle Numbers Line One:
+        """ + Style.RESET_ALL)
         print(*lotto_line)
+        submit_numbers = input("Do you wish to submit? y/n: ")
+        if submit_numbers.upper() == 'Y':
+            print("Your Numbers are being submitted to raffle..")
+            raffle_worksheet.append_row(lotto_line)
+        elif submit_numbers.upper() == 'N':
+            print("Not Submitted")
+        else:
+            back_to_main_menu()
         back_to_main_menu()
     elif num_of_lines == '3':
         lotto_line = random.sample(range(1, 28), 5)
         lotto_line2 = random.sample(range(1, 28), 5)
         lotto_line3 = random.sample(range(1, 28), 5)
-        print(Fore.LIGHTBLUE_EX + "\nQuick-pick Line One: " + Style.RESET_ALL)
+        print(Fore.LIGHTBLUE_EX + """\nRaffle Numbers Line One:
+        """ + Style.RESET_ALL)
         print(*lotto_line)
-        print(Fore.LIGHTBLUE_EX + "Quick-pick Line Two: " + Style.RESET_ALL)
+        print(Fore.LIGHTBLUE_EX + """Raffle Numbers Line Two:
+        """ + Style.RESET_ALL)
         print(*lotto_line2)
-        print(Fore.LIGHTBLUE_EX + "Quick-pick Line Three: " + Style.RESET_ALL)
+        print(Fore.LIGHTBLUE_EX + """Raffle NumbersLine Three:
+        """ + Style.RESET_ALL)
         print(*lotto_line3)
+        submit_numbers = input("Do you wish to submit? y/n: ")
+        if submit_numbers.upper() == 'Y':
+            print("Your Numbers are being submitted to raffle..")
+            raffle_worksheet.append_row(lotto_line)
+            raffle_worksheet.append_row(lotto_line2)
+            raffle_worksheet.append_row(lotto_line3)
+        elif submit_numbers.upper() == 'N':
+            print("Not Submitted")
+        else:
+            back_to_main_menu()
         back_to_main_menu()
     else:
         print("\nYou entered incorrect, please enter again")
         time.sleep(2)
-        lotto_quickpick()
+        raffle_numbers()
+
+
+def pick_raffle_winners():
+    """F"""
+    print("winners")
 
 
 def player_menu():
@@ -370,8 +401,11 @@ def confirm_kit_order():
             kit_dict[j] += 1
         else:
             kit_dict[j] = 1
-    print("The following is the total number of kits needed:")
-    print(kit_dict)
+    print(Fore.LIGHTBLUE_EX + """
+    The following is the total number of kits needed:
+        """ + Style.RESET_ALL)
+    for keys, val in kit_dict.items():
+        print(keys, val)
     back_to_main_menu()
 
 

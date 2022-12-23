@@ -31,3 +31,51 @@ from this i decided instead of calling all data from the spreadsheet i made it g
 
 when adding delete player didnt work got an error about int str and I realised the row number was a string to changed to an int.
 it worked by got a warning to use delete_rows() instead of delete_row() so changed that and worked fine after that
+
+https://lucid.app/lucidchart/a7266b3b-06cc-49f8-b512-7ef2e880f1b5/edit?viewport_loc=-838%2C70%2C4451%2C2046%2C0_0&invitationId=inv_2b70d115-293e-4ac8-8826-07a126004676
+
+![flow chart](/assets/images/flowchart.jpeg)
+
+Git and GitHub
+Code Institute template was used to create GitHub public repository home-library-app. In template repository I clicked on "use this template" --> "create new repository", I chose repository name and clicked on the green button "Create repository from template".
+
+I cloned repository to my local machine using GitHub Desktop and opened it in PyCharm IDE.
+
+I developed programm, often commiting changes using terminal commands:
+
+git add .
+git commit -m "Do something"
+git push
+I made sure that all my libraries and packages are listed in requirements.txt.
+
+When program was ready for further deployment I visited heroku.com website to deploy on heroku.
+
+Deployment to Heroku
+I visited https://heroku.com/ and opened dashboard. Then I clicked button "New" and selected "Create new app" button.
+
+I entered my app name as "home-library-app-ci", chose region to Europe and clicked on "Create app" button
+
+deploy1
+
+The next step was to go to "Deploy" tab and then to "Deployment method" section to authorize and connect my GitHub account.
+deploy2
+
+Upon succesfull connection I selected main branch from "home-library-app" repository.
+deploy3
+
+Then I went to "Settings" tab...
+deploy4
+
+... and next to "Buildpacks" section. In the next step I added pyhton and nodejs buildpacks. Order here is very important.
+deploy5
+
+In the next step I went to "Config Vars" section and added KEY "CREDS" - that maches my token name defined in python constant in api/google_sheets_api.py - with value of my credentials token (copy all and paste).
+
+I added key "PORT" with value "8080" and save changes.
+
+deploy6
+
+In the next step I went back to "Deploy" tab and decided to use automatic deploys, however manual mode is also available to deploy chosen branch.
+deploy7
+
+The link to my deployed app was shown on screen: https://home-library-app-ci.herokuapp.com/
