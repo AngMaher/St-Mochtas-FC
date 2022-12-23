@@ -172,8 +172,7 @@ def get_player_details():
     3. Kit sizes: YXS, YS, YM, YL, YXL, XS, S, M, L
     4. Please note the annual fee is 180 euro, no exceptions.
             """ + Style.RESET_ALL)
-        data_str = input("""Please enter details here,
-                        or enter exit to go back: """)
+        data_str = input("Please enter details here, or 'exit' to go back: ")
         if data_str.upper() == 'EXIT':
             back_to_main_menu()
         else:
@@ -228,9 +227,7 @@ def delete_player():
     if row_delete.upper() == 'EXIT':
         back_to_main_menu()
     else:
-        print(row_delete)
         row_number = player_worksheet.findall(row_delete)
-        print(row_number)
         row_player = re.search('R(.+?)C', str(row_number))
         if row_player:
             found = row_player.group(1)
@@ -258,6 +255,7 @@ def show_all_outstanding_fees():
     one list.
     Imported re to use function search to search through each string
     and extract the row number. Then stored all row numbers in a list.
+    Found this on stckoverflow:
     https://stackoverflow.com/questions/4666973/how-to-extract-the
     -substring-between-two-markers
     At this stage I iterated through list of all data from spreadsheet and
@@ -273,7 +271,7 @@ def show_all_outstanding_fees():
     total_fees.extend(fees_180)
     total_row_nums = []
     for text in total_fees:
-        row_num = re.search('R(.+?)C', str(text))
+        row_num = re.search('R(.+?)C', str(text))  # stackoverflow link above
         if row_num:
             found = row_num.group(1)
             total_row_nums.append(found)
@@ -342,10 +340,10 @@ def check_amount(pay):
     """
     Function to check if the amount entered is either 60, 120, or 180
     """
-    if pay == '60' or pay == '180':
+    if pay in ('60', '180'):
         return True
     try:
-        if pay != '60' or pay != '180':
+        if pay not in ('60', '180'):
             raise ValueError(
                 f"Please enter 60 or 180, {pay} provided"
             )
@@ -374,7 +372,6 @@ def confirm_kit_order():
             kit_dict[j] = 1
     print("The following is the total number of kits needed:")
     print(kit_dict)
-
     back_to_main_menu()
 
 
@@ -397,7 +394,8 @@ def print_all_data():
     Function to print all data in a table using tabulate
     found on https://www.statology.org/create-table-in-python/
     """
-    print(tabulate(all_data[1:], headers=all_data[0], tablefmt="pretty"))
+    data_table = player_worksheet.get_all_values()
+    print(tabulate(data_table[1:], headers=all_data[0], tablefmt="pretty"))
 
 
 main_menu()
