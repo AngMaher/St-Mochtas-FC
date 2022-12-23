@@ -141,8 +141,15 @@ For 3 Lines of Raffle Ticket numbers - 3
 
 
 def pick_raffle_winners():
-    """F"""
-    print("winners")
+    """
+    Function to get all the entries and store in an array ans to randomly pick
+    a line of numbers
+    """
+    raffle_data = raffle_worksheet.get_all_values()
+    winner = random.choice(raffle_data)
+    print("Winning row of numbers are...")
+    print(*winner)
+    back_to_main_menu()
 
 
 def player_menu():
