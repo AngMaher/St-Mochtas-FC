@@ -55,7 +55,7 @@ def welcome_logo():
 
 def main_menu():
     """
-    This function checks the input and loads the correct
+    This function checks the input of main menu and loads the correct
     function based on the answer.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
