@@ -1,6 +1,7 @@
 """
 This program is based on a local football club, where player details are stored
-in a spreadsheet and can be amended
+in a spreadsheet and can be saved or deleted. The club also has a raffle where
+random numbers can be generated and winning n umbers picked.
 """
 import os
 import time
@@ -62,10 +63,10 @@ def main_menu():
     print("Please choose from the following options:\n")
     print(Fore.LIGHTBLUE_EX + """
     1. Work with player details.
-    2. Get 1 line to 3 lines of raffle numbers.
-    3. Pick Raffle winners.
+    2. Get 1 line OR 3 lines of raffle numbers.
+    3. Pick Raffle winner.
     4. Quit.\n""" + Style.RESET_ALL)
-    menu_one = input("Please Enter 1 or 2 or 3: ")
+    menu_one = input("Please Enter 1 or 2 or 3 or 4: \n")
     if menu_one == '1':
         player_menu()
     elif menu_one == '2':
@@ -73,6 +74,7 @@ def main_menu():
     elif menu_one == '3':
         pick_raffle_winners()
     elif menu_one == '4':
+        print("Terminating program...")
         sys.exit()
     else:
         print("Invaid! Please try again")
@@ -92,16 +94,18 @@ def raffle_numbers():
  +-+-+-+-+-+-+ +-+-+-+-+
     """ + Style.RESET_ALL)
     print(Fore.LIGHTBLUE_EX + """
-For 1 Line of Raffle Ticket numbers - 1
-For 3 Lines of Raffle Ticket numbers - 3
+1. For 1 Line of Raffle Ticket numbers.
+2. For 3 Lines of Raffle Ticket numbers.
+3. Quit program or back to main menu.
     """ + Style.RESET_ALL)
-    num_of_lines = input("Please enter 1 or 3: ")
+    num_of_lines = input("Please enter 1 or 3: \n")
     if num_of_lines == '1':
         lotto_line = random.sample(range(1, 28), 5)
         print(Fore.LIGHTBLUE_EX + """\nRaffle Numbers Line One:
         """ + Style.RESET_ALL)
         print(*lotto_line)
-        submit_numbers = input("Do you wish to submit? y/n: ")
+        print("Please give customer their numbers")
+        submit_numbers = input("Do you wish to submit? y/n: \n")
         if submit_numbers.upper() == 'Y':
             print("Your Numbers are being submitted to raffle..")
             raffle_worksheet.append_row(lotto_line)
@@ -110,7 +114,7 @@ For 3 Lines of Raffle Ticket numbers - 3
         else:
             back_to_main_menu()
         back_to_main_menu()
-    elif num_of_lines == '3':
+    elif num_of_lines == '2':
         lotto_line = random.sample(range(1, 28), 5)
         lotto_line2 = random.sample(range(1, 28), 5)
         lotto_line3 = random.sample(range(1, 28), 5)
@@ -123,17 +127,28 @@ For 3 Lines of Raffle Ticket numbers - 3
         print(Fore.LIGHTBLUE_EX + """Raffle NumbersLine Three:
         """ + Style.RESET_ALL)
         print(*lotto_line3)
-        submit_numbers = input("Do you wish to submit? y/n: ")
+        print("Please give customer their numbers")
+        submit_numbers = input("Do you wish to submit? y/n: \n")
         if submit_numbers.upper() == 'Y':
             print("Your Numbers are being submitted to raffle..")
             raffle_worksheet.append_row(lotto_line)
             raffle_worksheet.append_row(lotto_line2)
             raffle_worksheet.append_row(lotto_line3)
         elif submit_numbers.upper() == 'N':
-            print("Not Submitted")
+            print("Not Submitted..")
         else:
             back_to_main_menu()
         back_to_main_menu()
+    elif num_of_lines == '3':
+        choice = input("Back to main menu or Quit program? M/Q: \n")
+        if choice.upper() == 'M':
+            main_menu()
+        elif choice.upper() == 'Q':
+            sys.exit()
+        else:
+            print("Invaid! Please try again")
+            time.sleep(2)
+            raffle_numbers()
     else:
         print("\nYou entered incorrect, please enter again")
         time.sleep(2)
@@ -147,8 +162,14 @@ def pick_raffle_winners():
     """
     raffle_data = raffle_worksheet.get_all_values()
     winner = random.choice(raffle_data)
-    print("Winning row of numbers are...")
+    print(Fore.BLUE + """
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
++  Winning row of numbers are...    +
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    """ + Style.RESET_ALL)
+    print(Fore.LIGHTYELLOW_EX + """ """)
     print(*winner)
+    print(""" """ + Style.RESET_ALL)
     back_to_main_menu()
 
 
@@ -170,12 +191,12 @@ def player_menu():
     print(Fore.LIGHTBLUE_EX + """
     1. Register a player on your team.
     2. Delete player.
-    3. Print a list of all players and fees due.
+    3. Print a list of players that have fees due.
     4. Pay instalment of fees or in full.
     5. Confirm Order for Team Kits.
-    6. Quit program.\n
+    6. Quit program or back to main menu.\n
     """ + Style.RESET_ALL)
-    player_menu_choice = input("Please enter a number 1 to 6: ")
+    player_menu_choice = input("Please enter a number 1 to 6: \n")
     if player_menu_choice == '1':
         get_player_details()
     elif player_menu_choice == '2':
@@ -187,8 +208,15 @@ def player_menu():
     elif player_menu_choice == '5':
         confirm_kit_order()
     elif player_menu_choice == '6':
-        print("Program is terminating...")
-        sys.exit()
+        choice = input("Back to main menu or Quit program? M/Q: \n")
+        if choice.upper() == 'M':
+            main_menu()
+        elif choice.upper() == 'Q':
+            sys.exit()
+        else:
+            print("Invaid! Please try again")
+            time.sleep(2)
+            player_menu()
     else:
         print("Invaid! Please try again")
         time.sleep(2)
@@ -207,16 +235,18 @@ def get_player_details():
     """ + Fore.LIGHTYELLOW_EX + """
     2. Example: JS12jan12,Joe Smith,+353866052459,YL,180
     """ + Style.RESET_ALL + Fore.RED + """
-    3. Kit sizes: YXS, YS, YM, YL, YXL, XS, S, M, L
-    4. Please note the annual fee is 180 euro, no exceptions.
+    3. Please start Mobile Phone with """ + Fore.RED + """ +353
+    """ + Fore.RED + """
+    4. Kit sizes: YXS, YS, YM, YL, YXL, XS, S, M, L
+    5. Please note the annual fee is 180 euro, no exceptions.
             """ + Style.RESET_ALL)
-        data_str = input("Please enter details here, or 'exit' to go back: ")
+        data_str = input("Please enter details here, or 'exit' to go back: \n")
         if data_str.upper() == 'EXIT':
             back_to_main_menu()
         else:
             player_data = data_str.split(",")
             if check_player_data(player_data):
-                print("Thank you ")
+                print("Thank you, player saved to database!")
                 break
     update_player_worksheet(player_data)
     back_to_main_menu()
@@ -234,7 +264,7 @@ def check_player_data(values):
             )
         if any(values[0] in sl for sl in all_data):
             raise ValueError(
-                f"\nUsername already in use, you put {values[0]}"
+                f"Username already in use, you put {values[0]}"
             )
         if not values[2].startswith("+353"):
             raise ValueError(
@@ -260,8 +290,7 @@ def delete_player():
     """
     print_all_data()
     row_delete = input("""
-    \nPlease enter Username of person you wish to delete, or exit:
-                """)
+    Please enter Username of person you wish to delete, or exit: \n""")
     if row_delete.upper() == 'EXIT':
         back_to_main_menu()
     else:
@@ -331,11 +360,12 @@ def pay_fee_for_player():
     os.system('cls' if os.name == 'nt' else 'clear')
     print_all_data()
     print(Fore.RED + """
-    Please look at table above and take note of the USERNAME of the player
-    you would like to either pay an installment off full fee off.
+Please look at table above and take note of the USERNAME of the player
+you would like to either pay an installment off full fee off.
         """ + Style.RESET_ALL)
-    username = input("Please enter the username: ").upper()
-    if any(username in sl for sl in all_data):
+    username = input("Please enter the username: \n").upper()
+    check_db_for_username = player_worksheet.get_all_values()
+    if any(username in sl for sl in check_db_for_username):
         amending_fee(username)
     else:
         print("Username is incorrect, please try again")
@@ -360,7 +390,7 @@ def amending_fee(name):
         print(f"\n{name_of_player} owes £{fee_due}")
     while True:
         print("Please Note: Please pay 1 installment of 60 or in full 180.")
-        amount_pay = input("Please input amount you are paying off: ")
+        amount_pay = input("Please input amount you are paying off: \n")
         if check_amount(amount_pay):
             new_amount = int(fee_due) - int(amount_pay)
             if new_amount < 0:
@@ -385,6 +415,7 @@ def check_amount(pay):
             raise ValueError(
                 f"Please enter 60 or 180, {pay} provided"
             )
+        return False
     except ValueError as error:
         print(f"Invalid data {error}, please try again.\n")
         return False
@@ -413,6 +444,7 @@ def confirm_kit_order():
         """ + Style.RESET_ALL)
     for keys, val in kit_dict.items():
         print(keys, val)
+    print("\nPlease go to Balon Sports Website to purchase..")
     back_to_main_menu()
 
 
@@ -420,7 +452,7 @@ def back_to_main_menu():
     """
     Function to call to either go back to main menu or quit progam
     """
-    to_end = input("Return to main menu? y/n: ")
+    to_end = input("Return to main menu? 'n' will quit program: y/n: \n")
     if to_end.upper() == 'Y':
         main_menu()
     elif to_end.upper() == 'N':
