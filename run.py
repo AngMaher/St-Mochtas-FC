@@ -52,8 +52,8 @@ def main_menu():
     os.system('cls' if os.name == 'nt' else 'clear')
     welcome_logo()
     print(Fore.LIGHTBLUE_EX + """
-Welcome to the St Mochtas FC app. Here as chair of the club, you can add new
-players or delete. Pay off fees as they are paid, also generate raffle ticket
+Welcome to the St Mochtas FC app. Here, as chair of the club, you can add or
+delete players. Pay off fees as they are paid, generate raffle ticket
 numbers for anyone buying tickets and also generate the winning numbers.
     """ + Style.RESET_ALL)
     print("Please choose from the following options:\n")
