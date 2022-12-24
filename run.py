@@ -34,15 +34,6 @@ def welcome_logo():
     Function to hold welcome title for program
     """
     print(Fore.LIGHTYELLOW_EX + """
- _     _ _______ ___     _______ _______ __   __ _______   _______ _______
-| | _ | |       |   |   |       |       |  |_|  |       | |       |       |
-| || || |    ___|   |   |       |   _   |       |    ___| |_     _|   _   |
-|       |   |___|   |   |       |  | |  |       |   |___    |   | |  | |  |
-|       |    ___|   |___|      _|  |_|  |       |    ___|   |   | |  |_|  |
-|   _   |   |___|       |     |_|       | ||_|| |   |___    |   | |       |
-|__| |__|_______|_______|_______|_______|_|   |_|_______|   |___| |_______|
-    """)
-    print(Fore.LIGHTYELLOW_EX + """
  _______ _______   __   __ _______ _______ __   __ _______ _______ _______
 |       |       | |  |_|  |       |       |  | |  |       |   _   |       |
 |  _____|_     _| |       |   _   |       |  |_|  |_     _|  |_|  |  _____|
@@ -60,6 +51,11 @@ def main_menu():
     """
     os.system('cls' if os.name == 'nt' else 'clear')
     welcome_logo()
+    print(Fore.LIGHTBLUE_EX + """
+Welcome to the St Mochtas FC app. Here as chair of the club, you can add new
+players or delete. Pay off fees as they are paid, also generate raffle ticket
+numbers for anyone buying tickets and also generate the winning numbers.
+    """ + Style.RESET_ALL)
     print("Please choose from the following options:\n")
     print(Fore.LIGHTBLUE_EX + """
     1. Work with player details.
