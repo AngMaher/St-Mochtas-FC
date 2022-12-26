@@ -53,7 +53,7 @@ def main_menu():
     welcome_logo()
     print(Fore.LIGHTBLUE_EX + """
 Welcome to the St Mochtas FC app. Here, as chair of the club, you can add or
-delete players. Pay off fees as they are paid, generate raffle ticket
+delete player. Pay off fees as they are paid, generate raffle ticket
 numbers for anyone buying tickets and also generate the winning numbers.
     """ + Style.RESET_ALL)
     print("Please choose from the following options:\n")
@@ -230,13 +230,14 @@ def get_player_details():
     1. Format:  Username(Initials DOB),Name,Mobile Number,Kit Size,Fee Due
     """ + Fore.LIGHTYELLOW_EX + """
     2. Example: JS12jan12,Joe Smith,+353866052459,YL,180
-    """ + Style.RESET_ALL + Fore.RED + """
-    3. Please start Mobile Phone with """ + Fore.RED + """ +353
-    """ + Fore.RED + """
-    4. Kit sizes: YXS, YS, YM, YL, YXL, XS, S, M, L
+    """ + Style.RESET_ALL + Fore.GREEN + """
+    3. Please start Mobile Phone with """ + Fore.CYAN + """ +353
+    """ + Fore.MAGENTA + """
+    4. Kit sizes are: YXS, YS, YM, YL, YXL, XS, S, M, L
+        """ + Fore.CYAN + """
     5. Please note the annual fee is 180 euro, no exceptions.
             """ + Style.RESET_ALL)
-        data_str = input("Please enter details here, or 'exit' to go back: \n")
+        data_str = input("Please enter details, or type 'exit' to go back: \n")
         if data_str.upper() == 'EXIT':
             back_to_main_menu()
         else:
@@ -385,7 +386,9 @@ def amending_fee(name):
     else:
         print(f"\n{name_of_player} owes £{fee_due}")
     while True:
-        print("Please Note: Please pay 1 installment of 60 or in full 180.")
+        print(Fore.RED + """
+Please pay 1 installment of 60 or full 180.
+            """ + Style.RESET_ALL)
         amount_pay = input("Please input amount you are paying off: \n")
         if check_amount(amount_pay):
             new_amount = int(fee_due) - int(amount_pay)
@@ -393,6 +396,9 @@ def amending_fee(name):
                 print("Paid too much off, Please check table again...")
                 time.sleep(5)
                 pay_fee_for_player()
+            if new_amount == 0:
+                print("They are now paid off in full")
+                player_worksheet.update_cell(cell_info, 5, new_amount)
             else:
                 print(f"{name_of_player} now owes {new_amount}")
                 player_worksheet.update_cell(cell_info, 5, new_amount)
