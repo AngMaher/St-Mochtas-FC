@@ -185,11 +185,11 @@ def player_menu():
      """ + Style.RESET_ALL)
     print("Please choose from the following options:\n")
     print(Fore.LIGHTBLUE_EX + """
-    1. Register a player on your team.
-    2. Delete player.
+    1. Register a player to the club.
+    2. Delete a player.
     3. Print a list of players that have fees due.
-    4. Pay instalment of fees or in full.
-    5. Confirm Order for Team Kits.
+    4. Pay instalment off fees or pay in full.
+    5. Check Order number for Team Kits.
     6. Quit program or back to main menu.\n
     """ + Style.RESET_ALL)
     player_menu_choice = input("Please enter a number 1 to 6: \n")
