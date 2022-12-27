@@ -73,7 +73,8 @@ numbers for anyone buying tickets and also generate the winning numbers.
         pick_raffle_winners()
     elif menu_one == '4':
         print("Program Terminated")
-        sys.exit()
+        time.sleep(2)
+        finish_program()
     else:
         print("Invaid! Please try again")
         time.sleep(2)
@@ -461,7 +462,8 @@ def back_to_main_menu():
         main_menu()
     elif to_end.upper() == 'N':
         print("Program Terminated")
-        sys.exit()
+        time.sleep(2)
+        finish_program()
     else:
         print("Error Wrong input.. Please try again..")
         back_to_main_menu()
@@ -483,6 +485,21 @@ def clear_screen():
     https://stackoverflow.com/questions/2084508/clear-terminal-in-python
     """
     os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def finish_program():
+    """
+    This function prints a screen to show the program is finished.
+    """
+    clear_screen()
+    welcome_logo()
+    print(Fore.LIGHTBLUE_EX + """
+    Thank you for using the St Mochtas FC app
+
+
+    Created By Angela Maher for Code Institute
+    """ + Style.RESET_ALL)
+    sys.exit()
 
 
 main_menu()

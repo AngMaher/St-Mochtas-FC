@@ -64,6 +64,82 @@ The second worksheet is to store the raffle numbers:
 
 ![main menu](/assets/images/main-menu.png)
 
+- The main screen features the logo for the app.
+- The main menu has an option to go to the player menu, to pick raffle numbers, to pick overall raffle winning numbers, or quit the program.
+
+### Player Menu
+
+![player menu](/assets/images/player-menu.png)
+
+- This screen shows the logo on top
+- User has options to add a new player
+- Delete a player from the database
+- Print a list of all outstanding fees
+- Pay fees off for a player
+- Show how many kits need ordering for each size
+- Option to quit the program or return to main menu
+
+### Enter player Details
+
+![enter player](/assets/images/enter-player.png)
+
+- This screen gives the user details and instructions on how to enter the players details to save to the worksheet
+
+### Delete a Player
+
+![delete a player](/assets/images/delete-player.png)
+
+- This screen shows a list of players so the user can find the username of the player they want to delete.
+- Enter in the username and the player is removed from the database.
+
+### List of outstanding fees
+
+![list of outstanding fees](/assets/images/loading-screen.png)
+
+- screen to show the program is fetching and loading the players with outstanding fees.
+
+![list of outstanding fees](/assets/images/list-of-fees.png)
+
+- screen to show all players who owe fees, in order of how much they owe.
+
+### Pay fees
+
+![pay fees](/assets/images/pay-fee.png)
+
+- Screen shows a list of all players from the database and asks of the username.
+
+![paying amount off](/assets/images/check-fee-amount.png)
+
+- This gives the option to the user to pay an installment of 60 off or pay the fee in full.
+- It shows how much the player owe and then how they now owe.
+
+### Check Kit Sizes
+
+![Kit sizes](/assets/images/kit-sizes.png)
+
+- This screen shows the user how much of each kit size is needed to be ordered.
+
+### Raffle Menu
+
+![raffle menu](/assets/images/raffle-menu.png)
+
+- This is screen for the user to choose either 1 line of numbers or 3
+
+![one line](/assets/images/one-line.png)
+
+- Prints one line of numbers to the screen
+- Asks if user wants to save to database
+
+![three lines](/assets/images/three-lines.png)
+
+- Prints three lines of numbers to the screen
+- Asks if user wants to save to database
+
+![raffle winners](/assets/images/raffle-winners.png)
+
+- This screen radomly picks a row of numbers from the database as the winning ticket numbers.
+
+
 # Deployment
 
 ## Git and GitHub
