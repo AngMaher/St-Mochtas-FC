@@ -99,6 +99,8 @@ def raffle_numbers():
     """ + Style.RESET_ALL)
     num_of_lines = input("Please enter 1, 2 or 3: \n")
     if num_of_lines == '1':
+        clear_screen()
+        welcome_logo()
         lotto_line = random.sample(range(1, 28), 5)
         print(Fore.LIGHTBLUE_EX + """\nRaffle Numbers Line One:
         """ + Style.RESET_ALL)
@@ -115,6 +117,8 @@ def raffle_numbers():
             back_to_main_menu()
         back_to_main_menu()
     elif num_of_lines == '2':
+        clear_screen()
+        welcome_logo()
         lotto_line = random.sample(range(1, 28), 5)
         lotto_line2 = random.sample(range(1, 28), 5)
         lotto_line3 = random.sample(range(1, 28), 5)
@@ -188,7 +192,7 @@ def player_menu():
     3. Print a list of players that have fees due.
     4. Pay instalment off fees or pay in full.
     5. Check Order number for Team Kits.
-    6. Quit program or back to main menu.\n
+    6. Quit program or back to main menu.
     """ + Style.RESET_ALL)
     player_menu_choice = input("Please enter a number 1 to 6: \n")
     if player_menu_choice == '1':
