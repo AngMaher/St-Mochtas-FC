@@ -157,8 +157,8 @@ def pick_raffle_winners():
     Function to get all the entries and store in an array and to randomly pick
     a line of numbers
     """
-    welcome_logo()
     clear_screen()
+    welcome_logo()
     raffle_data = raffle_worksheet.get_all_values()
     winner = random.choice(raffle_data)
     print(Fore.BLUE + """
@@ -224,7 +224,7 @@ def get_player_details():
         print(Fore.RED + """
     1. Format:  Username(Initials DOB),Name,Mobile Number,Kit Size,Fee Due
     """ + Fore.LIGHTYELLOW_EX + """
-    2. Example: JS12jan12,Joe Smith,+353866052459,YL,180
+    2. Example: JS12012012,Joe Smith,+353866052459,YL,180
     """ + Style.RESET_ALL + Fore.GREEN + """
     3. Please start Mobile Phone with """ + Fore.CYAN + """ +353
     """ + Fore.MAGENTA + """
@@ -340,7 +340,7 @@ def show_all_outstanding_fees():
     for rows in total_row_nums:
         each_row = player_worksheet.row_values(rows)
         list_of_owed.append(each_row)
-    os.system('cls' if os.name == 'nt' else 'clear')
+    clear_screen()
     print("Find below a list of all players in order of what they owe.\n")
     print(tabulate(list_of_owed[1:], headers=all_data[0], tablefmt="pretty"))
     back_to_main_menu()
