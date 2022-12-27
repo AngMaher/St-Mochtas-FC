@@ -31,7 +31,9 @@ raffle_worksheet = SHEET.worksheet('raffle')
 
 def welcome_logo():
     """
-    Function to hold welcome title for program
+    Function to hold welcome title for program.
+    Text ASCII:
+    http://patorjk.com/software/taag/#p=display&h=2&v=2&f=Modular&t=St%20Mocthas
     """
     print(Fore.LIGHTYELLOW_EX + """
  _______ _______   __   __ _______ _______ __   __ _______ _______ _______
@@ -49,7 +51,7 @@ def main_menu():
     This function checks the input of main menu and loads the correct
     function based on the answer.
     """
-    os.system('cls' if os.name == 'nt' else 'clear')
+    clear_screen()
     welcome_logo()
     print(Fore.LIGHTBLUE_EX + """
 Welcome to the St Mochtas FC app. Here, as chair of the club, you can add or
@@ -70,7 +72,7 @@ numbers for anyone buying tickets and also generate the winning numbers.
     elif menu_one == '3':
         pick_raffle_winners()
     elif menu_one == '4':
-        print("Terminating program...")
+        print("Program Terminated")
         sys.exit()
     else:
         print("Invaid! Please try again")
@@ -83,7 +85,8 @@ def raffle_numbers():
     function to choose how many lines of numbers to enter raffle
     and to display ramdon numbers to the screen and save to spreadsheet
     """
-    os.system('cls' if os.name == 'nt' else 'clear')
+    clear_screen()
+    welcome_logo()
     print(Fore.LIGHTYELLOW_EX + """
  +-+-+-+-+-+-+ +-+-+-+-+
  |R|a|f|f|l|e| |M|e|n|u|
@@ -94,13 +97,14 @@ def raffle_numbers():
 2. For 3 Lines of Raffle Ticket numbers.
 3. Quit program or back to main menu.
     """ + Style.RESET_ALL)
-    num_of_lines = input("Please enter 1 or 3: \n")
+    num_of_lines = input("Please enter 1, 2 or 3: \n")
     if num_of_lines == '1':
         lotto_line = random.sample(range(1, 28), 5)
         print(Fore.LIGHTBLUE_EX + """\nRaffle Numbers Line One:
         """ + Style.RESET_ALL)
         print(*lotto_line)
-        print("Please give customer their numbers")
+        print(Fore.LIGHTYELLOW_EX + """Please give customer their numbers
+        """ + Style.RESET_ALL)
         submit_numbers = input("Do you wish to submit? y/n: \n")
         if submit_numbers.upper() == 'Y':
             print("Your Numbers are being submitted to raffle..")
@@ -123,7 +127,8 @@ def raffle_numbers():
         print(Fore.LIGHTBLUE_EX + """Raffle NumbersLine Three:
         """ + Style.RESET_ALL)
         print(*lotto_line3)
-        print("Please give customer their numbers")
+        print(Fore.LIGHTYELLOW_EX + """Please give customer their numbers
+        """ + Style.RESET_ALL)
         submit_numbers = input("Do you wish to submit? y/n: \n")
         if submit_numbers.upper() == 'Y':
             print("Your Numbers are being submitted to raffle..")
@@ -136,15 +141,7 @@ def raffle_numbers():
             back_to_main_menu()
         back_to_main_menu()
     elif num_of_lines == '3':
-        choice = input("Back to main menu or Quit program? M/Q: \n")
-        if choice.upper() == 'M':
-            main_menu()
-        elif choice.upper() == 'Q':
-            sys.exit()
-        else:
-            print("Invaid! Please try again")
-            time.sleep(2)
-            raffle_numbers()
+        back_to_main_menu()
     else:
         print("\nYou entered incorrect, please enter again")
         time.sleep(2)
@@ -153,9 +150,11 @@ def raffle_numbers():
 
 def pick_raffle_winners():
     """
-    Function to get all the entries and store in an array ans to randomly pick
+    Function to get all the entries and store in an array and to randomly pick
     a line of numbers
     """
+    welcome_logo()
+    clear_screen()
     raffle_data = raffle_worksheet.get_all_values()
     winner = random.choice(raffle_data)
     print(Fore.BLUE + """
@@ -172,12 +171,11 @@ def pick_raffle_winners():
 def player_menu():
     """
     Function to enter the player section and choose you option.
-    found clear screen:
-    https://stackoverflow.com/questions/2084508/clear-terminal-in-python
     ASCII art:
     http://patorjk.com/software/taag/#p=display&h=2&v=2&f=Digital&t=Player%20Menu
     """
-    os.system('cls' if os.name == 'nt' else 'clear')
+    clear_screen()
+    welcome_logo()
     print(Fore.LIGHTYELLOW_EX + """
      +-+-+-+-+-+-+ +-+-+-+-+
      |P|l|a|y|e|r| |M|e|n|u|
@@ -204,15 +202,7 @@ def player_menu():
     elif player_menu_choice == '5':
         confirm_kit_order()
     elif player_menu_choice == '6':
-        choice = input("Back to main menu or Quit program? M/Q: \n")
-        if choice.upper() == 'M':
-            main_menu()
-        elif choice.upper() == 'Q':
-            sys.exit()
-        else:
-            print("Invaid! Please try again")
-            time.sleep(2)
-            player_menu()
+        back_to_main_menu()
     else:
         print("Invaid! Please try again")
         time.sleep(2)
@@ -224,6 +214,7 @@ def get_player_details():
     Function to take in player details and append them to the spread sheet.
     Used the love sandwiches program to setup the while loop.
     """
+    clear_screen()
     while True:
         print("To Enter New Player please follow the Instructions:\n")
         print(Fore.RED + """
@@ -285,6 +276,8 @@ def delete_player():
     """
     Function to delete a player in the database using username
     """
+    clear_screen()
+    welcome_logo()
     print_all_data()
     row_delete = input("""
     Please enter Username of person you wish to delete, or exit: \n""")
@@ -325,7 +318,7 @@ def show_all_outstanding_fees():
     At this stage I iterated through list of all data from spreadsheet and
     printed each row.
     """
-    os.system('cls' if os.name == 'nt' else 'clear')
+    clear_screen()
     print("Find below a list of all players in order of what they owe.\n")
     print("Loading...\n")
     total_fees = player_worksheet.findall("60")
@@ -354,7 +347,8 @@ def pay_fee_for_player():
     Function to pay eitheran agreed installment off the fee or pay the fee
     in full.
     """
-    os.system('cls' if os.name == 'nt' else 'clear')
+    clear_screen()
+    welcome_logo()
     print_all_data()
     print(Fore.RED + """
 Please look at table above and take note of the USERNAME of the player
@@ -432,6 +426,8 @@ def confirm_kit_order():
     occurrences-in-list#:~:text=1)%20Using%20count()%20method,occurrences
     %20is%20to%20be%20counted. Amended it to only go from second item.
     """
+    clear_screen()
+    welcome_logo()
     print("Please order your kits for your team")
     kit_col = player_worksheet.col_values(4)
     kit_col_upper = [kit.upper() for kit in kit_col]
@@ -446,7 +442,9 @@ def confirm_kit_order():
         """ + Style.RESET_ALL)
     for keys, val in kit_dict.items():
         print(keys, val)
-    print("\nPlease go to Balon Sports Website to purchase..")
+    print(Fore.LIGHTYELLOW_EX + """
+    Please go to Balon Sports Website to purchase..
+        """ + Style.RESET_ALL)
     back_to_main_menu()
 
 
@@ -458,6 +456,7 @@ def back_to_main_menu():
     if to_end.upper() == 'Y':
         main_menu()
     elif to_end.upper() == 'N':
+        print("Program Terminated")
         sys.exit()
     else:
         print("Error Wrong input.. Please try again..")
@@ -471,6 +470,15 @@ def print_all_data():
     """
     data_table = player_worksheet.get_all_values()
     print(tabulate(data_table[1:], headers=all_data[0], tablefmt="pretty"))
+
+
+def clear_screen():
+    """
+    Function to clear screen
+    found clear screen:
+    https://stackoverflow.com/questions/2084508/clear-terminal-in-python
+    """
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 main_menu()
