@@ -1,6 +1,8 @@
 # St Mochtas Football Club Application
 
-[Live Link](https://st-mochtas-fc.herokuapp.com/)
+Please find live link here: [Live Link](https://st-mochtas-fc.herokuapp.com/)
+
+![amireponsive](/assets/images/amireponsive.png)
 
 ## Introduction
 This is a program for a local football club, which can be easily be adapted to suit many different types of clubs.
@@ -139,6 +141,61 @@ The second worksheet is to store the raffle numbers:
 
 - This screen radomly picks a row of numbers from the database as the winning ticket numbers.
 
+### Finishing Screen
+
+![Finishing screen](/assets/images/finishing-screen.png)
+
+- This screen deploys when the programs ends
+
+
+# Technology
+
+## Languages Used
+
+- [Python](https://www.python.org/) - high level programming language
+- [Markdown](https://www.markdownguide.org/cheat-sheet) - language used to write README and TESTING documents.
+
+## Software Used
+
+- [LucidChart](https://lucidchart.com) - LucidChart was used to create flowchart for the project.
+- [Git](https://git-scm.com/) - Git was used for version control by using the Gitpod terminal to commit to Git and push to Github.
+- [Github](https://github.com/) - Github was used to write and store the projects code.
+- [Google Sheets](https://www.google.com/sheets/about/) - Used to store all the data from the program.
+- [Heroku](https://www.heroku.com/home) - Heroku was used to deploy the project.
+- [Text ASCII Art Generator](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) - Used to create the logo for the project.
+
+## Python libraries/modules
+
+- [gspread](https://docs.gspread.org/en/v5.7.0/) - used for control of Google Sheets 
+- [OAuthLib](https://oauthlib.readthedocs.io/en/latest/) - needed to access google sheets
+- [os](https://www.geeksforgeeks.org/os-module-python-examples/) - used to write the clear screen function
+- [time](https://docs.python.org/3/library/time.html) - python module - used to pause screen before continuing
+- [sys](https://superfastpython.com/exit-process/#What_is_sysexit) - Python Module used to exit the program
+- [random](https://www.w3schools.com/python/ref_random_random.asp) - Python Module used to generate random numbers for raffle
+- [tabulate](https://www.statology.org/create-table-in-python/) - Used to create the table to print the data from the player worksheet
+- [colorama](https://pypi.org/project/colorama/) - Used to colour the text in terminal output.
+
+# Testing
+
+## Validation
+
+### PEP8
+
+- [PEP8CI](https://pep8ci.herokuapp.com/) - This was used test the code. No errors where found in the code.
+
+![PEP8CI](/assets/images/pep8.png)
+
+## Manual Testing
+
+Please find manual testing file here: [TESTING.md](/TESTING.md)
+
+## Bugs/known issues
+
+- In the function to collect only the players with fees due from the database, I found it hard to find a function to help with this.  I have worked out a way to do what I want, but it has resulted in the table being slow when it is loading to the screen.  I have not found a better way of doing this and I am aware it is a little slow.
+
+- I use clear screen function, to clear up the screen when new menu etc is loaded. This is working fine on the github terminal, but I have noticed on heroku, it doesnt seem to clear fully and I dont know how to fix this.
+
+![error heroku](/assets/images/heroku-error.png)
 
 # Deployment
 
@@ -178,3 +235,30 @@ In the next step I went back to "Deploy" tab and decided to use manual mode, how
 ![connected screen](/assets/images/connected.png)
 
 The link to my deployed app was shown on screen: [Live Link](https://st-mochtas-fc.herokuapp.com/)
+
+# Future Development
+
+- If I had more time or decided to develop my program further I would bring in object oriented programming, setting the player up as an object. 
+- I would set it up that each manager could look after their own team by seaching under a team code.
+- Maybe have a parents section where they could register for summer camps.
+
+# Credits
+
+## Code
+
+- Line 17 - 26 connection to google sheets taken from Love Sandwiches
+- Line 258 - any() found examples on w3schools [link](https://www.w3schools.com/python/ref_func_any.asp#:~:text=The%20any()%20function%20returns,()%20function%20will%20return%20False)
+- Line 487 - found function to clear screen on stackoverflow [link](https://stackoverflow.com/questions/2084508/clear-terminal-in-python)
+- Line 502 - found out about sys.exit() from superfastpython [link](https://superfastpython.com/exit-process/)
+
+## Media
+
+[Text ASCII Art Generator](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) - to create my logo
+
+## Resources
+
+ - Websites used along with course material were [StackOverFlow](https://stackoverflow.com/questions/18754276/python-for-beginners), and [W3Schools](https://www.w3schools.com/python/)
+
+ # Acknowledgements
+  
+- I would like to thank my mentor Jubril for his guidance through the project and my mainy testers (family and friends).
