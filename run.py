@@ -436,6 +436,7 @@ def confirm_kit_order():
     print("Please order your kits for your team")
     kit_col = player_worksheet.col_values(4)
     kit_col_upper = [kit.upper() for kit in kit_col]
+    #  Link for for loop in docfile
     kit_dict = {}
     for j in kit_col_upper[1:]:
         if j in kit_dict:
@@ -475,6 +476,7 @@ def print_all_data():
     found on https://www.statology.org/create-table-in-python/
     """
     data_table = player_worksheet.get_all_values()
+    #  link for code in docfile
     print(tabulate(data_table[1:], headers=all_data[0], tablefmt="pretty"))
 
 

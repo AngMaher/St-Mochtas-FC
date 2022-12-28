@@ -6,35 +6,92 @@ Please find live link here: [Live Link](https://st-mochtas-fc.herokuapp.com/)
 
 ## Introduction
 This is a program for a local football club, which can be easily be adapted to suit many different types of clubs.
-The user can add a new player to a spreadsheet, clear off a players fees, check outstanding fees, and put in an order 
-for kits for the team. The club also do a lotto each week and the user can get lotto numbers for doing quick pick.
+The user (Club chair or coach) can add a new player to a spreadsheet and delete a player, clear off a players fees,
+check outstanding fees, check how many kits are needed and in what sizes.
+The club also do a raffle where the user can get random number for customers and save them to a worksheet.
+They can then use the worksheet to randomly pick raffle ticket numbers.
+
+# Table of Contents
+
+- [User Experience](#user-experience)
+
+  - [User Goals](#user-goals)
+
+  - [Developer Goals](#developer-goals)
+
+- [Logic and Features](#logic-and-features)
+
+  - [Logic](#logic)
+
+  - [Database Structure](#database-structure)
+
+  - [Features](#features)
+
+    - [Main Menu](#main-menu)
+
+    - [Player Menu](#player-menu)
+
+    - [Enter Player Details](#enter-player-details)
+
+    - [Delete a Player](#delete-a-player)
+
+    - [List of Outstanding Fees](#list-of-outstanding-fees)
+
+    - [Pay Fees](#pay-fees)
+
+    - [Check Kit Sizes](#check-kit-sizes)
+
+    - [Raffle Menu](#raffle-menu)
+
+    - [Finishing Screen](#finishing-screen)
+
+- [Technology](#technology)
+
+  - [Lanuages Used](#languages-used)
+
+  - [Software Used](#software-used)
+
+  - [Python Libraries/Modules](#python-librariesmodules)
+
+- [Testing](#testing)
+
+  - [Validation](#validation)
+
+    - [PEP8CI](#pep8)
+
+  - [Manual Testing](#manual-testing)
+
+  - [Bugs/Known Issues](#bugsknown-issues)
+
+- [Deployment](#deployment)
+
+  - [Git and Github](#git-and-github)
+
+  - [Deployment to Heroku](#deployment-to-heroku)
+
+- [Future Development](#future-development)
+
+- [Credits](#credits)
+
+- [Acknowledgements](#acknowledgements)
+
+
 
 # User Experience
 
-- User Goals
+## User Goals
   - As a user they want to see a list of all players to note their username before making changes.
   - As a coach or director of the club they want a way to add new players to the team.
   - As a user they want to be able to delete a player.
   - As a user they want to be able to pay an installment or their fee off in full.
-  - As a user they want to be able to show the full list of player for the whole clib or for an individual team.
-  - As a user they woule like to look at total number of sizes in kits and confirm to order
-  - As a user they would like to when all orders are confirmed they can view, total of each size before getting onto to the company
+  - As a user they want to be able to show the full list of player for the whole club.
+  - As a user they woule like to look at total number of sizes in kits
+  - As a user they would like to get random raffle numbers
 
-- Developer Goals
+## Developer Goals
   - As a developer, I want to keep the program simple
   - As a developer, I want to make navigating through straight forward and easy to follow.
-  - As a developer, I want to create a easy to read tablr to display information from the spreadsheet.
-
-worked on bugs and warnings as they came along. when doing try/excpet got on error and realsied i had a second try the same further down.
-
-used love sandwiches as referrence for validating and writing player details
-
-decided tp change the year to a username, and it was not as straight forward as i thought, 
-i worked out that I needed to pass all the data into the function, but was finding it difficult to iterate through the sublist to check if the username was already used. I found from a online search on the stackoverflow site that using a built-in function any() would work. https://stackoverflow.com/questions/40514139/check-if-an-item-is-in-a-nested-list
-from this i decided instead of calling all data from the spreadsheet i made it global.
-
-when adding delete player didnt work got an error about int str and I realised the row number was a string to changed to an int.
-it worked by got a warning to use delete_rows() instead of delete_row() so changed that and worked fine after that
+  - As a developer, I want to create a easy to read table to display information from the spreadsheet.
 
 
 # Logic and Features
@@ -42,6 +99,7 @@ it worked by got a warning to use delete_rows() instead of delete_row() so chang
 ## Logic
 
 - I created a flowchart using Lucid Charts 
+
 ![flow chart](/assets/images/flowchart.jpeg)
 [Link to Flow Chart](https://lucid.app/lucidchart/a7266b3b-06cc-49f8-b512-7ef2e880f1b5/edit?viewport_loc=-671%2C-132%2C4933%2C2267%2C0_0&invitationId=inv_2b70d115-293e-4ac8-8826-07a126004676)
 
@@ -164,7 +222,7 @@ The second worksheet is to store the raffle numbers:
 - [Heroku](https://www.heroku.com/home) - Heroku was used to deploy the project.
 - [Text ASCII Art Generator](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) - Used to create the logo for the project.
 
-## Python libraries/modules
+## Python Libraries/Modules
 
 - [gspread](https://docs.gspread.org/en/v5.7.0/) - used for control of Google Sheets 
 - [OAuthLib](https://oauthlib.readthedocs.io/en/latest/) - needed to access google sheets
@@ -197,44 +255,52 @@ Please find manual testing file here: [TESTING.md](/TESTING.md)
 
 ![error heroku](/assets/images/heroku-error.png)
 
+-  decided to change the year to a username, and it was not as straight forward as i thought, 
+i worked out that I needed to pass all the data into the function, but was finding it difficult to iterate through the sublist to check if the username was already used. I found from a online search on the stackoverflow site that using a built-in function any() would work. [Link for any() function](https://stackoverflow.com/questions/40514139/check-if-an-item-is-in-a-nested-list)
+from this i decided instead of calling all data from the spreadsheet I made it global.
+ 
+ - When doing function to delete player didnt work got an error about int str and I realised the row number was a string and to changed to an int.
+It worked but got a warning to use delete_rows() instead of delete_row() so changed that and worked fine after that.
+
 # Deployment
 
 ## Git and GitHub
-Code Institute template was used to create GitHub public repository st-mochtas-fc. 
+- Code Institute template was used to create GitHub public repository st-mochtas-fc.
 
-I developed programm, often commiting changes using terminal commands.
-I made sure that all my libraries and packages are listed in requirements.txt.
+- I developed programm, often commiting changes using terminal commands.
 
-When program was ready for further deployment I visited heroku.com website to deploy on heroku.
+- I made sure that all my libraries and packages are listed in requirements.txt.
+
+- When program was ready for further deployment I visited heroku.com website to deploy on heroku.
 
 ## Deployment to Heroku
-I visited https://heroku.com/ and opened dashboard. Then I clicked button "New" and selected "Create new app" button.
+- I visited https://heroku.com/ and opened dashboard. Then I clicked button "New" and selected "Create new app" button.
 
-I entered my app name as "St-Mochtas-FC", region to Europe and clicked on "Create app" button
+- I entered my app name as "St-Mochtas-FC", region to Europe and clicked on "Create app" button
 
 ![create app](/assets/images/createapp.png)
 
-The next step was to go to "Deploy" tab and then to "Deployment method" section to authorize and connect my GitHub account.
+- The next step was to go to "Deploy" tab and then to "Deployment method" section to authorize and connect my GitHub account.
 
 ![connect github](/assets/images/connectgithub.png)
 
-When succesfully connected I selected main branch from "St-Mochtas-FC" repository.
+- When succesfully connected I selected main branch from "St-Mochtas-FC" repository.
 
-Then I went to "Settings" tab
+- Then I went to "Settings" tab
 
-In the next step I went to "Config Vars" section and added KEY "CREDS" with value of my credentials file creds.json (copy all and paste).
+- In the next step I went to "Config Vars" section and added KEY "CREDS" with value of my credentials file creds.json (copy all and paste).
 
 ![config vars](/assets/images/configvars.png)
 
-Next to "Buildpacks" section. In the next step I added pyhton and nodejs buildpacks, making sure python was first then nodejs.
+- Next to "Buildpacks" section. In the next step I added pyhton and nodejs buildpacks, making sure python was first then nodejs.
 
 ![buildpacks](/assets/images/buildpacks.png)
 
-In the next step I went back to "Deploy" tab and decided to use manual mode, however automatic mode is also available to deploy, which I done at a later time.
+- In the next step I went back to "Deploy" tab and decided to use manual mode, however automatic mode is also available to deploy, which I done at a later time.
 
 ![connected screen](/assets/images/connected.png)
 
-The link to my deployed app was shown on screen: [Live Link](https://st-mochtas-fc.herokuapp.com/)
+- The link to my deployed app was shown on screen: [Live Link](https://st-mochtas-fc.herokuapp.com/)
 
 # Future Development
 
@@ -247,13 +313,13 @@ The link to my deployed app was shown on screen: [Live Link](https://st-mochtas-
 ## Code
 
 - Line 17 - 26 connection to google sheets taken from Love Sandwiches
-- Line 258 - any() found examples on w3schools [link](https://www.w3schools.com/python/ref_func_any.asp#:~:text=The%20any()%20function%20returns,()%20function%20will%20return%20False)
+- Line 258 - any() found examples on w3schools [link](https://stackoverflow.com/questions/40514139/check-if-an-item-is-in-a-nested-list)
 - Line 487 - found function to clear screen on stackoverflow [link](https://stackoverflow.com/questions/2084508/clear-terminal-in-python)
 - Line 502 - found out about sys.exit() from superfastpython [link](https://superfastpython.com/exit-process/)
 
 ## Media
 
-[Text ASCII Art Generator](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) - to create my logo
+- [Text ASCII Art Generator](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) - to create my logo
 
 ## Resources
 
@@ -261,4 +327,4 @@ The link to my deployed app was shown on screen: [Live Link](https://st-mochtas-
 
  # Acknowledgements
   
-- I would like to thank my mentor Jubril for his guidance through the project and my mainy testers (family and friends).
+- I would like to thank my mentor Jubril for his guidance through the project and my many testers (family and friends).
