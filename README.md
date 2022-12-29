@@ -1,6 +1,7 @@
 # St Mochtas Football Club Application
 
 Please find live link here: [Live Link](https://st-mochtas-fc.herokuapp.com/)
+Please find link to Github repository: [github](https://github.com/AngMaher/St-Mochtas-FC)
 
 ![amireponsive](/assets/images/amireponsive.png)
 
@@ -239,7 +240,7 @@ The second worksheet is to store the raffle numbers:
 
 ### PEP8
 
-- [PEP8CI](https://pep8ci.herokuapp.com/) - This was used test the code. No errors where found in the code.
+- [PEP8CI](https://pep8ci.herokuapp.com/) - This was used test the code. No errors where found in the code. 
 
 ![PEP8CI](/assets/images/pep8.png)
 
@@ -261,6 +262,9 @@ from this i decided instead of calling all data from the spreadsheet I made it g
  
  - When doing function to delete player didnt work got an error about int str and I realised the row number was a string and to changed to an int.
 It worked but got a warning to use delete_rows() instead of delete_row() so changed that and worked fine after that.
+
+- The below warnings are on githib and are out of my control to fix.
+![warnings on github](/assets/images/error-github.png)
 
 # Deployment
 
@@ -302,11 +306,23 @@ It worked but got a warning to use delete_rows() instead of delete_row() so chan
 
 - The link to my deployed app was shown on screen: [Live Link](https://st-mochtas-fc.herokuapp.com/)
 
+## Local Deployment
+- To make a local copy of this project, you can clone it. In your IDE Terminal, type the following command to clone my repository:
+
+- git clone https://github.com/AngMaher/St-Mochtas-FC
+
+## To Fork the Repository
+- To make a copy or ‘fork’ the repository
+  - Log into GitHub and locate the repository
+  - Select the ‘fork’ option to create and copy the original
+  Link to Github repository: ![Github](https://github.com/AngMaher/St-Mochtas-FC)
+
 # Future Development
 
 - If I had more time or decided to develop my program further I would bring in object oriented programming, setting the player up as an object. 
 - I would set it up that each manager could look after their own team by seaching under a team code.
 - Maybe have a parents section where they could register for summer camps.
+- I would bring in OOP if I had more time and create a class for player and maybe expand and do more functionality with player.
 
 # Credits
 

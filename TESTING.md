@@ -14,9 +14,8 @@
 | Input Phone Number |  Validate that it begins with +353 No issues. No other checks are in place, a string could be entered as longas it starts with +353. Future delvelopment could have more validation. | Pass |
 | Input Kit Sizes | Created constant list to hold all Kit sizes, tested uppercase and lowercase, also entered string that is not in the list, numbers and blank all came back with correct error messages. | Pass |
 | Delete player, ask for username | Have tested correct name, incorrect name numbers, strings and blank | Fail, found part of the if statement had mistakenly been removed, the error messages where not showing. I fixed it by adding else: part of the statement to print error message and return to the screen to try again |
-| Input username to pay fee | tested incorrect username, numbers, blank and correct username | Pass |
+| Input fee amount | check 180 is entered, tested with string, different numbers and blank correct error messages are in place. | Pass | Input username to pay fee | tested incorrect username, numbers, blank and correct username | Pass |
 | Input fee or installment | tested correct amounts "60" or "180" and any other number, string or blank, also tried paying 180 from someone that owes less or try paying off someone that doesnt owe any money | Pass |
-| Input fee amount | check 180 is entered, tested with string, different numbers and blank correct error messages are in place. | Pass |
 | back to main menu function, input y/n to return | Tested that uppercase and lowercase worked, blank and anything other than y/n had correct error message. | Pass |
 | Quit, on main menu | tested correct number, string, incorrect number, empty string | Pass |
 
