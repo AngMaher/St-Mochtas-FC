@@ -294,8 +294,12 @@ def delete_player():
         if row_player:
             found = row_player.group(1)
             player_worksheet.delete_rows(int(found))
-        print(f"You have sucessfully deleted {row_delete}")
-        back_to_main_menu()
+            print(f"You have sucessfully deleted {row_delete}")
+            back_to_main_menu()
+        else:
+            print("Player not found, please try again...")
+            time.sleep(3)
+            delete_player()
 
 
 def update_player_worksheet(data):

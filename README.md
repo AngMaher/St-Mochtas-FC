@@ -82,11 +82,11 @@ They can then use the worksheet to randomly pick raffle ticket numbers.
 ## User Goals
   - As a user they want to see a list of all players to note their username before making changes.
   - As a coach or director of the club they want a way to add new players to the team.
-  - As a user they want to be able to delete a player.
-  - As a user they want to be able to pay an installment or their fee off in full.
+  - As a user they want to be able to delete a player who has left the club.
+  - As a user they want to be able to pay an installment or their fee off in full when payment is received.
   - As a user they want to be able to show the full list of player for the whole club.
-  - As a user they woule like to look at total number of sizes in kits
-  - As a user they would like to get random raffle numbers
+  - As a user they woule like to look at total number of sizes in kits for when they want to order kits.
+  - As a user they would like to get random raffle numbers to give to customers when they purchase raffle tickets.
 
 ## Developer Goals
   - As a developer, I want to keep the program simple
