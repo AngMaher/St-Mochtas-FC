@@ -1,7 +1,7 @@
 # St Mochtas Football Club Application
 
-Please find live link here: [Live Link](https://st-mochtas-fc.herokuapp.com/)
-Please find link to Github repository: [github](https://github.com/AngMaher/St-Mochtas-FC)
+- Please find live link here: [Live Link](https://st-mochtas-fc.herokuapp.com/)
+- Please find link to Github repository: [github](https://github.com/AngMaher/St-Mochtas-FC)
 
 ![amireponsive](/assets/images/amireponsive.png)
 
